@@ -8,6 +8,30 @@
       <div class="projects-grid">
         <!-- Project 1: WBS Quote Management -->
         <div class="project-card">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/600x400/2e8b57/ffffff?text=WBS+Quote+App" 
+                 alt="Capture d'écran Gestion de Devis WBS" 
+                 class="project-img">
+            <div class="project-links">
+              <a href="#" class="demo-link" target="_blank">
+                <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+                Démo
+              </a>
+              <a href="#" class="github-link" target="_blank">
+                <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                </svg>
+                Code
+              </a>
+            </div>
+          </div>
+
           <div class="project-header">
             <h3 class="project-title">Gestion de Devis WBS</h3>
             <span class="project-category">Application Web</span>
@@ -41,6 +65,30 @@
 
         <!-- Project 2: Spray Info E-commerce -->
         <div class="project-card">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/600x400/50c878/ffffff?text=Spray+Info+B2B" 
+                 alt="Capture d'écran Spray Info E-commerce" 
+                 class="project-img">
+            <div class="project-links">
+              <a href="#" class="demo-link" target="_blank">
+                <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+                Démo
+              </a>
+              <a href="#" class="github-link" target="_blank">
+                <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                </svg>
+                Code
+              </a>
+            </div>
+          </div>
+
           <div class="project-header">
             <h3 class="project-title">Spray Info B2B</h3>
             <span class="project-category">E-commerce</span>
@@ -74,6 +122,30 @@
 
         <!-- Project 3: Portfolio Showcase -->
         <div class="project-card">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/600x400/a8e6cf/333333?text=Portfolio+Interactif" 
+                 alt="Capture d'écran Portfolio" 
+                 class="project-img">
+            <div class="project-links">
+              <a href="#" class="demo-link" target="_blank">
+                <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+                Démo
+              </a>
+              <a href="#" class="github-link" target="_blank">
+                <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                </svg>
+                Code
+              </a>
+            </div>
+          </div>
+
           <div class="project-header">
             <h3 class="project-title">Portfolio Interactif</h3>
             <span class="project-category">Portfolio</span>
@@ -113,7 +185,6 @@
 export default {
   name: "Projects",
   mounted() {
-    // Observer pour les animations d'apparition
     this.initAnimations();
   },
   methods: {
@@ -132,7 +203,6 @@ export default {
         });
       }, observerOptions);
 
-      // Observer chaque carte de projet
       document.querySelectorAll(".project-card").forEach((card) => {
         observer.observe(card);
       });
@@ -142,10 +212,8 @@ export default {
 </script>
 
 <style scoped>
-/* Import de la police Syncopate */
 @import url("https://fonts.googleapis.com/css2?family=Syncopate:wght@400;500;700&display=swap");
 
-/* Variables */
 .projects {
   --emerald-primary: #50c878;
   --emerald-dark: #2e8b57;
@@ -192,19 +260,22 @@ export default {
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
+  gap: 2.5rem;
   max-width: 1100px;
   margin: 0 auto;
 }
 
-/* Carte de projet simplifiée */
+/* Carte de projet */
 .project-card {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: all 0.4s ease;
   border: 1px solid rgba(80, 200, 120, 0.1);
-  border-radius: 12px;
-  padding: 1.5rem;
+  border-radius: 16px;
+  padding: 0;
+  overflow: hidden;
+  background: rgba(20, 30, 25, 0.3);
+  backdrop-filter: blur(10px);
 }
 
 .project-card.animated {
@@ -214,14 +285,93 @@ export default {
 
 .project-card:hover {
   border-color: rgba(80, 200, 120, 0.3);
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(80, 200, 120, 0.15);
 }
 
-/* En-tête du projet */
+/* Section image */
+.project-image {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(80, 200, 120, 0.1);
+}
+
+.project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-img {
+  transform: scale(1.05);
+}
+
+/* Liens sur l'image */
+.project-links {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 30, 25, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-image:hover .project-links {
+  opacity: 1;
+}
+
+.demo-link, .github-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.demo-link {
+  background: var(--emerald-primary);
+  color: white;
+  border: 2px solid var(--emerald-primary);
+}
+
+.github-link {
+  background: transparent;
+  color: var(--emerald-primary);
+  border: 2px solid var(--emerald-primary);
+}
+
+.demo-link:hover {
+  background: var(--emerald-dark);
+  border-color: var(--emerald-dark);
+  transform: translateY(-2px);
+}
+
+.github-link:hover {
+  background: rgba(80, 200, 120, 0.1);
+  transform: translateY(-2px);
+}
+
+.link-icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+/* Contenu de la carte */
 .project-header {
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(80, 200, 120, 0.2);
-  padding-bottom: 1rem;
+  padding: 1.5rem 1.5rem 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -229,7 +379,7 @@ export default {
 
 .project-title {
   color: var(--text-primary);
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
   margin: 0;
 }
@@ -239,15 +389,14 @@ export default {
   font-size: 0.8rem;
   font-weight: 500;
   background: rgba(80, 200, 120, 0.1);
-  padding: 0.2rem 0.6rem;
+  padding: 0.3rem 0.8rem;
   border-radius: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-/* Contenu du projet */
 .project-content {
-  padding-top: 0.5rem;
+  padding: 0 1.5rem 1.5rem;
 }
 
 .project-description {
@@ -257,24 +406,24 @@ export default {
   font-size: 0.95rem;
 }
 
-/* Technologies - Badges shadcn style */
+/* Technologies */
 .project-tech {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 0.5rem;
   margin-bottom: 1.5rem;
 }
 
 .tech-badge {
   background: rgba(80, 200, 120, 0.08);
   color: var(--emerald-light);
-  padding: 0.2rem 0.6rem;
+  padding: 0.3rem 0.8rem;
   border-radius: 6px;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 500;
   border: 1px solid rgba(80, 200, 120, 0.2);
   transition: all 0.2s ease;
-  height: 24px;
+  height: 28px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -284,6 +433,7 @@ export default {
 .tech-badge:hover {
   background: rgba(80, 200, 120, 0.15);
   border-color: rgba(80, 200, 120, 0.3);
+  transform: translateY(-1px);
 }
 
 /* Statistiques */
@@ -302,19 +452,19 @@ export default {
 .stat-number {
   display: block;
   color: var(--emerald-primary);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.3rem;
 }
 
 .stat-label {
   color: var(--text-muted);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-/* Animations décalées pour chaque carte */
+/* Animations décalées */
 .project-card:nth-child(1).animated {
   animation: fadeInUp 0.6s ease 0.1s forwards;
 }
@@ -363,53 +513,47 @@ export default {
   .projects-grid {
     grid-template-columns: 1fr;
     max-width: 500px;
-    gap: 1.5rem;
+    gap: 2rem;
   }
 
-  .project-card {
-    padding: 1.25rem;
+  .project-image {
+    height: 200px;
+  }
+
+  .project-links {
+    gap: 1rem;
+  }
+
+  .demo-link, .github-link {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  .link-icon {
+    width: 16px;
+    height: 16px;
   }
 
   .project-header {
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.75rem;
+    padding: 1.25rem 1.25rem 0.5rem;
   }
 
   .project-title {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
 
-  .project-category {
-    font-size: 0.75rem;
-    padding: 0.15rem 0.5rem;
+  .project-content {
+    padding: 0 1.25rem 1.25rem;
   }
 
   .project-description {
     font-size: 0.9rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .project-tech {
-    gap: 0.3rem;
-    margin-bottom: 1.25rem;
   }
 
   .tech-badge {
-    font-size: 0.7rem;
-    padding: 0.2rem 0.5rem;
-    height: 22px;
-  }
-
-  .project-stats {
-    gap: 1rem;
-  }
-
-  .stat-number {
-    font-size: 1rem;
-  }
-
-  .stat-label {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    height: 26px;
   }
 }
 
@@ -423,34 +567,28 @@ export default {
     letter-spacing: 1px;
   }
 
-  .projects-grid {
-    gap: 1.25rem;
+  .project-image {
+    height: 180px;
   }
 
-  .project-card {
-    padding: 1rem;
+  .project-links {
+    flex-direction: column;
+    gap: 0.8rem;
   }
 
-  .project-title {
-    font-size: 1rem;
+  .project-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
   }
 
-  .project-description {
-    font-size: 0.85rem;
+  .project-category {
+    align-self: flex-start;
   }
 
-  .tech-badge {
-    font-size: 0.65rem;
-    padding: 0.15rem 0.4rem;
-    height: 20px;
-  }
-
-  .stat-number {
-    font-size: 0.9rem;
-  }
-
-  .stat-label {
-    font-size: 0.65rem;
+  .project-stats {
+    flex-direction: column;
+    gap: 1rem;
   }
 }
 </style>
