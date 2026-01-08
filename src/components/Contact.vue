@@ -2,7 +2,7 @@
   <section class="contact" id="contact">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">CONTACTEZ-MOI</h2>
+        <h2 class="section-title">contactez-moi</h2>
       </div>
 
       <div class="contact-content">
@@ -358,11 +358,10 @@ export default {
 
 .section-title {
   font-family: "Syncopate", sans-serif;
-  font-weight: 500;
+  font-weight: 700;
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   color: var(--emerald-primary);
   letter-spacing: 3px;
-  text-transform: uppercase;
   position: relative;
   padding-bottom: 15px;
 }
