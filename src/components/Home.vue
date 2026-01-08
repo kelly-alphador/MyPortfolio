@@ -1,93 +1,64 @@
 <template>
   <section class="hero" id="home">
-    <div class="floating-element" v-for="n in 3" :key="n"></div>
-    
     <div class="hero-content">
-      <p class="hero-subtitle">Bonjour, je suis <span class="wave">👋</span></p>
-      <h1 class="hero-title">
+      <p class="hero-greeting">Bonjour <span class="wave">👋</span> je suis</p>
+      <h1 class="hero-name">< A. Kelly Alphador /></h1>
+      <div class="hero-role">
         <span ref="typedElement"></span>
         <span class="typed-cursor">|</span>
-      </h1>
-      <p class="hero-description">
-          Développeur Full-Stack .NET / Vue.js, passionné par la création de solutions web et desktop modernes et performantes.
-          Je maîtrise ASP.NET MVC, ASP.NET Core Web API, WPF, ainsi que .NET Framework et .NET Core, et j'intègre des interfaces utilisateur modernes avec Vue.js pour transformer vos idées en applications robustes et maintenables.
-      </p>
-      <div class="cta-buttons">
-        <a href="/cv.pdf" download class="btn btn-primary">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="download-icon">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-          Télécharger CV
-        </a>
-        <a href="#contact" class="btn btn-secondary" @click="scrollToSection('contact')">Me contacter</a>
+      </div>
+      <!-- Image ajoutée ici -->
+      <div class="hero-avatar">
+        <img src="@/assets/images/avatar.png" alt="Photo de Kelly Alphador" />
       </div>
     </div>
-
-   
   </section>
 </template>
 
 <script>
-import Typed from 'typed.js'
+import Typed from "typed.js";
 
 export default {
-  name: 'Home',
+  name: "Home",
   data() {
     return {
-      typed: null
-    }
+      typed: null,
+    };
   },
   mounted() {
-    this.initTyped()
+    this.initTyped();
   },
   beforeDestroy() {
     if (this.typed) {
-      this.typed.destroy()
+      this.typed.destroy();
     }
   },
   methods: {
     initTyped() {
       this.typed = new Typed(this.$refs.typedElement, {
         strings: [
-          'Kelly Alphador',
-          'Full-Stack Developer',
-          '.NET / Vue.js',
-           'Kelly Alphador',
-          'Full-Stack Developer',
-          '.NET / Vue.js',
-           'Kelly Alphador',
-          'Full-Stack Developer',
-          '.NET / Vue.js',
-          'Kelly Alphador'
+          "Full-Stack Developer",
+          ".NET / Vue.js",
+          "Full-Stack Developer",
+          ".NET / Vue.js",
+          "Full-Stack Developer",
+          ".NET / Vue.js",
         ],
         typeSpeed: 80,
         backSpeed: 50,
         backDelay: 2000,
         startDelay: 1000,
-        loop: false,
+        loop: true,
         showCursor: false,
-        onComplete: () => {
-          // Cache le curseur personnalisé quand l'animation est terminée
-          const cursor = document.querySelector('.typed-cursor')
-          if (cursor) {
-            cursor.style.display = 'none'
-          }
-        }
-      })
+      });
     },
-    scrollToSection(sectionId) {
-      const element = document.getElementById(sectionId)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }
-    }
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Syncopate:wght@400;500;700&display=swap");
+
 /* Hero Section */
 .hero {
   display: flex;
@@ -110,11 +81,12 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
 }
 
-.hero-subtitle {
-  font-size: 1.9rem;
-  color: #d767f1;
+.hero-greeting {
+  font-size: 2rem;
+  color: #ffffff;
   font-weight: 300;
   opacity: 0;
   animation: fadeInUp 1s ease-out 0.3s forwards;
@@ -131,165 +103,95 @@ export default {
 }
 
 @keyframes wave {
-  0% { transform: rotate(0deg); }
-  10% { transform: rotate(14deg); }
-  20% { transform: rotate(-8deg); }
-  30% { transform: rotate(14deg); }
-  40% { transform: rotate(-4deg); }
-  50% { transform: rotate(10deg); }
-  60% { transform: rotate(0deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(14deg);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  30% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
-.hero-title {
-  font-size: clamp(1rem, 9vw, 9rem);
-  font-weight: 630;
-  margin-bottom: 1rem;
-   background: linear-gradient(45deg, #ff6ec7, #a64ca6, #6a0dad);;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.hero-name {
+  font-family: "Syncopate", sans-serif;
+  font-weight: 600;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
+  color: #50c878;
   opacity: 0;
   animation: fadeInUp 1s ease-out 0.6s forwards;
   letter-spacing: -0.02em;
-  white-space: nowrap;
-  text-align: center;
-  width: 100%;
-  min-height: 1.2em; /* Assure une hauteur constante */
+  line-height: 1.1;
+  margin: 0;
+}
+
+.hero-role {
+  font-family: "Syncopate", sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  color: #ffffff;
+  font-weight: 400;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.9s forwards;
+  min-height: 1.5em;
   display: flex;
   align-items: center;
   justify-content: center;
-  
+  margin-bottom: 1rem;
+}
+
+/* Style pour l'avatar - sans bordure ni ombre */
+.hero-avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 1.2s forwards;
+  /* Bordure et ombre retirées */
+}
+
+.hero-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Curseur personnalisé pour l'animation de typing */
 .typed-cursor {
   font-weight: 100;
-  color: #4ecdc4;
+  color: #14a085;
   animation: blink 1s infinite;
   margin-left: 4px;
 }
 
 @keyframes blink {
-  0%, 50% {
+  0%,
+  50% {
     opacity: 1;
   }
-  51%, 100% {
+  51%,
+  100% {
     opacity: 0;
   }
 }
-
-.hero-description {
-  font-size: 1rem;
-  color: white;
-  margin-bottom: 3rem;
-  line-height: 1.7;
-      font-family: Monument, sans-serif;
-   width: 60%;
-   text-align:left;
-}
-
-.cta-buttons {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  opacity: 0;
-  animation: fadeInUp 1s ease-out 1.2s forwards;
-}
-
-.btn {
-  padding: 1.2rem 2.5rem;
-  border: none;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  position: relative;
-  overflow: hidden;
-  min-width: 180px;
-  text-align: center;
-}
-
-.download-icon {
-  transition: transform 0.3s ease;
-}
-
-.btn-primary {
-    background: linear-gradient(45deg, #ff6ec7, #a64ca6, #6a0dad);
-  color: #ffffff;
-  box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
-}
-
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
-}
-
-.btn-primary:hover .download-icon {
-  transform: translateY(3px);
-}
-
-.btn-secondary {
-  background: transparent;
-  color: #ffffff;
-  border: 2px solid #d767f1;
-}
-
-.btn-secondary:hover {
-  background: #d767f1;
-  color: #0c0c0c;
-  transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
-}
-
-/* Floating elements 
-.floating-element {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(215, 103, 241, 0.7);
-
-  animation: float 8s ease-in-out infinite;
-  backdrop-filter: blur(1px);
-}*/
-/* Floating elements */
-.floating-element {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(215, 103, 241, 0.7);
-  animation: float 8s ease-in-out infinite;
-  filter: blur(0px); /* Applique le flou à l'élément lui-même */
-}
-.floating-element:nth-child(1) {
-  width: 120px;
-  height: 120px;
-  top: 15%;
-  left: 8%;
-  animation-delay: 0s;
-}
-
-.floating-element:nth-child(2) {
-  width: 200px;
-  height: 200px;
-  top: 50%;
-  right: 10%;
-  animation-delay: 2s;
-}
-
-.floating-element:nth-child(3) {
-  width: 90px;
-  height: 90px;
-  bottom: 25%;
-  left: 15%;
-  animation-delay: 4s;
-}
-
 
 /* Animations */
 @keyframes fadeInUp {
@@ -303,55 +205,28 @@ export default {
   }
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  33% {
-    transform: translateY(-15px) rotate(60deg);
-  }
-  66% {
-    transform: translateY(-25px) rotate(120deg);
-  }
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateX(-50%) translateY(0);
-  }
-  40% {
-    transform: translateX(-50%) translateY(-15px);
-  }
-  60% {
-    transform: translateX(-50%) translateY(-8px);
-  }
-}
-
+/* Responsive */
 @media (max-width: 968px) {
   .hero {
     padding: 0 1.5rem;
-    padding-top: 3rem;
   }
 
-  .hero-content {
-    max-width: 100%;
+  .hero-greeting {
+    font-size: 1.5rem;
   }
 
-  .hero-title {
-    font-size: clamp(2.8rem, 9vw, 5rem);
-    margin-bottom: 2rem;
-    font-family: Monument, sans-serif;
-    white-space: normal;
+  .hero-name {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
   }
 
-  .hero-description {
-  
-   width: 100%;
-  
+  .hero-avatar {
+    width: 150px;
+    height: 150px;
+    margin-top: 0.5rem;
   }
 
-  .cta-buttons {
-    gap: 1.5rem;
+  .hero-role {
+    font-size: clamp(1.2rem, 3vw, 2rem);
   }
 }
 
@@ -359,47 +234,23 @@ export default {
   .hero {
     min-height: calc(100vh - 80px);
     padding: 2rem 1rem;
-    padding-top: 2rem;
   }
 
-  .hero-content {
-    padding: 0;
+  .hero-greeting {
+    font-size: 1.2rem;
   }
 
-  .hero-subtitle {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
+  .hero-name {
+    font-size: clamp(1.5rem, 3vw, 2rem);
   }
 
-  .hero-title {
-    white-space: normal;
-    font-size: clamp(2.2rem, 8vw, 3.5rem);
-    margin-bottom: 1.5rem;
+  .hero-avatar {
+    width: 120px;
+    height: 120px;
   }
 
-  .hero-description {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-  }
-
-  .cta-buttons {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .btn {
-    padding: 1rem 2rem;
-    width: 100%;
-    max-width: 280px;
-  }
-
-  .floating-element {
-    display: none;
-  }
-
-  .scroll-indicator {
-    bottom: 2rem;
+  .hero-role {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
   }
 }
 
@@ -408,14 +259,21 @@ export default {
     padding: 1rem 0.5rem;
   }
 
-  .hero-title {
-    font-size: clamp(2rem, 7vw, 3rem);
+  .hero-greeting {
+    font-size: 1rem;
   }
 
-  .hero-description {
-    font-size: 1rem;
-    padding: 0 1rem;
-    text-align:left;
+  .hero-name {
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  }
+
+  .hero-avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .hero-role {
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
   }
 }
 </style>

@@ -1,113 +1,92 @@
 <template>
   <section class="experience" id="experience">
     <div class="container">
-      <div class="section-header" data-aos="fade-up" data-aos-duration="1000">
-        <h2 class="section-title">Mon Expérience</h2>
-        <p class="section-subtitle">Projets réalisés et expertise acquise</p>
+      <div class="section-header">
+        <h2 class="section-title">mon expérience</h2>
       </div>
       
-      <div class="experience-timeline">
+      <div class="experience-grid">
         <!-- WBS Experience -->
-        <div 
-          class="experience-item" 
-          data-aos="fade-right"
-          data-aos-duration="800"
-          data-aos-delay="200"
-        >
-          <div class="experience-card">
-            <div class="experience-header">
-              <div class="company-logo">
-                <span class="logo-text">WBS</span>
-              </div>
-              <div class="experience-info">
-                <h3 class="job-title">Développeur Full-Stack</h3>
-                <h4 class="company-name">WBS Enterprise</h4>
-                <span class="experience-duration">2023 - 2024</span>
-              </div>
+        <div class="experience-card">
+          <div class="experience-header">
+            <div class="company-info">
+              <h3 class="company-name">WBS ENTERPRISE</h3>
+              <span class="experience-duration">2023 - 2024</span>
+            </div>
+            <h4 class="job-title">Développeur Full-Stack</h4>
+          </div>
+          
+          <div class="experience-content">
+            <h5 class="project-title">Application de Gestion de Devis</h5>
+            <p class="project-description">
+              Développement d'une application web complète pour la gestion automatisée des devis clients. 
+              Interface utilisateur moderne et intuitive avec dashboard analytique en temps réel.
+            </p>
+            
+            <div class="tech-stack">
+              <span class="tech-tag">Symfony</span>
+              <span class="tech-tag">Vue.js</span>
+              <span class="tech-tag">PHP</span>
+              <span class="tech-tag">MySQL</span>
+              <span class="tech-tag">JavaScript</span>
             </div>
             
-            <div class="experience-content">
-              <h5 class="project-title">Application de Gestion de Devis</h5>
-              <p class="project-description">
-                Développement d'une application web complète pour la gestion automatisée des devis clients. 
-                Interface utilisateur moderne et intuitive avec dashboard analytique en temps réel.
-              </p>
-              
-              <div class="tech-stack">
-                <span class="tech-tag">Symfony</span>
-                <span class="tech-tag">Vue.js</span>
-                <span class="tech-tag">PHP</span>
-                <span class="tech-tag">MySQL</span>
-                <span class="tech-tag">JavaScript</span>
-              </div>
-              
-              <div class="achievements">
-                <div class="achievement">
-                  <div class="achievement-icon">📈</div>
-                  <span>+40% efficacité des équipes commerciales</span>
-                </div>
-                <div class="achievement">
-                  <div class="achievement-icon">⚡</div>
-                  <span>Génération automatisée des devis</span>
-                </div>
-                <div class="achievement">
-                  <div class="achievement-icon">🎯</div>
-                  <span>Interface responsive multi-plateforme</span>
-                </div>
-              </div>
-            </div>
+            <ul class="achievements">
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>+40% efficacité des équipes commerciales</span>
+              </li>
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>Génération automatisée des devis</span>
+              </li>
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>Interface responsive multi-plateforme</span>
+              </li>
+            </ul>
           </div>
         </div>
 
         <!-- Spray Info Experience -->
-        <div 
-          class="experience-item" 
-          data-aos="fade-left"
-          data-aos-duration="800"
-          data-aos-delay="300"
-        >
-          <div class="experience-card">
-            <div class="experience-header">
-              <div class="company-logo">
-                <span class="logo-text">SI</span>
-              </div>
-              <div class="experience-info">
-                <h3 class="job-title">Développeur .NET</h3>
-                <h4 class="company-name">Spray Info</h4>
-                <span class="experience-duration">2022 - 2023</span>
-              </div>
+        <div class="experience-card">
+          <div class="experience-header">
+            <div class="company-info">
+              <h3 class="company-name">SPRAY INFO</h3>
+              <span class="experience-duration">2022 - 2023</span>
+            </div>
+            <h4 class="job-title">Développeur .NET</h4>
+          </div>
+          
+          <div class="experience-content">
+            <h5 class="project-title">Site E-commerce B2B</h5>
+            <p class="project-description">
+              Création d'une plateforme e-commerce robuste et sécurisée pour la vente en ligne B2B. 
+              Architecture scalable avec gestion avancée des stocks et système de paiement intégré.
+            </p>
+            
+            <div class="tech-stack">
+              <span class="tech-tag">ASP.NET MVC</span>
+              <span class="tech-tag">C#</span>
+              <span class="tech-tag">SQL Server</span>
+              <span class="tech-tag">Entity Framework</span>
+              <span class="tech-tag">Bootstrap</span>
             </div>
             
-            <div class="experience-content">
-              <h5 class="project-title">Site E-commerce B2B</h5>
-              <p class="project-description">
-                Création d'une plateforme e-commerce robuste et sécurisée pour la vente en ligne B2B. 
-                Architecture scalable avec gestion avancée des stocks et système de paiement intégré.
-              </p>
-              
-              <div class="tech-stack">
-                <span class="tech-tag">ASP.NET MVC</span>
-                <span class="tech-tag">C#</span>
-                <span class="tech-tag">SQL Server</span>
-                <span class="tech-tag">Entity Framework</span>
-                <span class="tech-tag">Bootstrap</span>
-              </div>
-              
-              <div class="achievements">
-                <div class="achievement">
-                  <div class="achievement-icon">🛒</div>
-                  <span>Système de commande complet</span>
-                </div>
-                <div class="achievement">
-                  <div class="achievement-icon">💳</div>
-                  <span>Intégration paiement sécurisé</span>
-                </div>
-                <div class="achievement">
-                  <div class="achievement-icon">📊</div>
-                  <span>Dashboard administrateur avancé</span>
-                </div>
-              </div>
-            </div>
+            <ul class="achievements">
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>Système de commande complet</span>
+              </li>
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>Intégration paiement sécurisé</span>
+              </li>
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>Dashboard administrateur avancé</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -116,39 +95,50 @@
 </template>
 
 <script>
-import AOS from 'aos'
-import 'aos/dist/aos.css'
-
 export default {
-  name: 'ExperienceSection',
+  name: 'Experience',
   mounted() {
-    // Initialiser AOS
-    AOS.init({
-      duration: 1000,
-      easing: 'ease-out-cubic',
-      once: true,
-      offset: 120,
-      delay: 100,
-      anchorPlacement: 'top-bottom'
-    })
-
-    // Rafraîchir AOS après le montage du composant
-    this.$nextTick(() => {
-      AOS.refresh()
-    })
+    // Observer pour les animations d'apparition
+    this.initAnimations();
   },
-  beforeDestroy() {
-    // Nettoyer AOS
-    AOS.refreshHard()
+  methods: {
+    initAnimations() {
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+          }
+        });
+      }, observerOptions);
+
+      // Observer chaque carte d'expérience
+      document.querySelectorAll('.experience-card').forEach(card => {
+        observer.observe(card);
+      });
+    }
   }
 }
 </script>
 
 <style scoped>
-/* Experience Section */
+/* Import de la police Syncopate */
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;500;700&display=swap');
+
+/* Variables */
 .experience {
-    min-height: 100vh;
-    padding: 8rem 1rem 4rem;
+    --emerald-primary: #50C878;
+    --emerald-dark: #2E8B57;
+    --emerald-light: #A8E6CF;
+    --text-primary: #FFFFFF;
+    --text-secondary: #E8F5E9;
+    --text-muted: #C4E0A4;
+    padding: 100px 20px;
     position: relative;
 }
 
@@ -163,230 +153,196 @@ export default {
 }
 
 .section-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 800;
-    margin-bottom: 1rem;
-    background: linear-gradient(45deg, #ff6ec7, #a64ca6, #6a0dad);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.section-subtitle {
-    font-size: 1.2rem;
-    color: #b8b8b8;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-/* Timeline pour desktop */
-.experience-timeline {
-    max-width: 1000px;
-    margin: 0 auto;
+    font-family: 'Syncopate', sans-serif;
+    font-weight: 600;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--emerald-primary);
+    letter-spacing: 3px;
     position: relative;
+    padding-bottom: 15px;
 }
 
-.experience-timeline::before {
+.section-title::after {
     content: '';
     position: absolute;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(45deg, #ff6ec7, #a64ca6, #6a0dad);
-    border-radius: 2px;
+    width: 80px;
+    height: 2px;
+    background: var(--emerald-primary);
 }
 
-.experience-item {
-    position: relative;
-    margin-bottom: 4rem;
-    width: 50%;
-}
-
-.experience-item:nth-child(odd) {
-    left: 0;
-    padding-right: 3rem;
-}
-
-.experience-item:nth-child(even) {
-    left: 50%;
-    padding-left: 3rem;
-}
-
-.experience-item::after {
-    content: '';
-    position: absolute;
-    top: 2rem;
-    width: 20px;
-    height: 20px;
-    background: linear-gradient(45deg, #ff6ec7, #a64ca6, #6a0dad);
-    border-radius: 50%;
-    border: 4px solid #0c0c0c;
-    box-shadow: 0 0 20px rgba(78, 205, 196, 0.5);
-}
-
-.experience-item:nth-child(odd)::after {
-    right: -10px;
-}
-
-.experience-item:nth-child(even)::after {
-    left: -10px;
+/* Grid pour les cartes */
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 /* Carte d'expérience */
 .experience-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.experience-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 25px 50px rgba(78, 205, 196, 0.15);
-    border-color: rgba(78, 205, 196, 0.3);
+.experience-card.animated {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* En-tête de l'expérience */
 .experience-header {
-    display: flex;
-    align-items: center;
     margin-bottom: 1.5rem;
-    gap: 1rem;
+    border-bottom: 1px solid rgba(80, 200, 120, 0.2);
+    padding-bottom: 1rem;
 }
 
-.company-logo {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(45deg, #ff6ec7, #a64ca6, #6a0dad);
-    border-radius: 15px;
+.company-info {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.logo-text {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #ffffff;
-}
-
-.experience-info {
-    flex: 1;
-}
-
-.experience-info h3 {
-    color: #ffffff;
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 0.3rem;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
 }
 
 .company-name {
-    color: #4ecdc4;
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.3rem;
+    font-family: 'Syncopate', sans-serif;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: var(--emerald-primary);
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .experience-duration {
-    color: #b8b8b8;
-    font-size: 0.9rem;
-    background: rgba(78, 205, 196, 0.1);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    background: rgba(80, 200, 120, 0.1);
     padding: 0.3rem 0.8rem;
-    border-radius: 15px;
-    display: inline-block;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+.job-title {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
 }
 
 /* Contenu de l'expérience */
 .experience-content {
-    margin-top: 1rem;
+    padding-top: 0.5rem;
 }
 
 .project-title {
-    color: #ff6b6b;
-    font-size: 1.2rem;
+    color: var(--emerald-light);
+    font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 1rem;
 }
 
 .project-description {
-    color: #b8b8b8;
+    color: var(--text-secondary);
     line-height: 1.6;
     margin-bottom: 1.5rem;
+    font-size: 1rem;
 }
 
-/* Stack technique */
+/* Stack technique - Style shadcn */
 .tech-stack {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.4rem;
     margin-bottom: 1.5rem;
 }
 
 .tech-tag {
-    background: rgba(78, 205, 196, 0.2);
-    color: #4ecdc4;
-    padding: 0.4rem 0.8rem;
-    border-radius: 15px;
-    font-size: 0.85rem;
+    background: rgba(80, 200, 120, 0.08);
+    color: var(--emerald-light);
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
     font-weight: 500;
-    border: 1px solid rgba(78, 205, 196, 0.3);
-    transition: all 0.3s ease;
+    border: 1px solid rgba(80, 200, 120, 0.2);
+    transition: all 0.2s ease;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
 }
 
 .tech-tag:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.2);
+    background: rgba(80, 200, 120, 0.15);
+    border-color: rgba(80, 200, 120, 0.3);
 }
 
-/* Réalisations */
+/* Réalisations avec puces */
 .achievements {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 0.6rem;
 }
 
-.achievement {
+.achievement-item {
     display: flex;
-    align-items: center;
-    color: #b8b8b8;
+    align-items: flex-start;
+    color: var(--text-muted);
     font-size: 0.9rem;
-    transition: all 0.3s ease;
+    line-height: 1.4;
 }
 
-.achievement:hover {
-    color: #ffffff;
-    transform: translateX(5px);
-}
-
-.achievement-icon {
+.achievement-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--emerald-primary);
+    border-radius: 50%;
     margin-right: 0.8rem;
-    font-size: 1.2rem;
+    margin-top: 0.5rem;
     flex-shrink: 0;
 }
 
-/* Animations AOS */
-[data-aos="fade-right"] {
-    transform: translate3d(-100px, 0, 0);
-    opacity: 0;
+.achievement-item span {
+    flex: 1;
 }
 
-[data-aos="fade-left"] {
-    transform: translate3d(100px, 0, 0);
-    opacity: 0;
+/* Animation décalée pour chaque carte */
+.experience-card:nth-child(1).animated {
+    animation: fadeInUp 0.6s ease 0.1s forwards;
 }
 
-/* RESPONSIVE DESIGN - TÉLÉPHONE */
+.experience-card:nth-child(2).animated {
+    animation: fadeInUp 0.6s ease 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1100px) {
+    .experience-grid {
+        grid-template-columns: 1fr;
+        max-width: 700px;
+    }
+}
+
 @media (max-width: 768px) {
     .experience {
-        padding: 6rem 1rem 3rem;
+        padding: 80px 15px;
     }
 
     .section-header {
@@ -394,68 +350,22 @@ export default {
     }
 
     .section-title {
-        font-size: clamp(2rem, 8vw, 3rem);
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        letter-spacing: 2px;
     }
 
-    .section-subtitle {
-        font-size: 1rem;
-        padding: 0 0.5rem;
+    .experience-grid {
+        gap: 2rem;
     }
 
-    /* Timeline mobile */
-    .experience-timeline::before {
-        left: 20px;
-    }
-
-    .experience-item {
-        width: 100% !important;
-        left: 0 !important;
-        padding-left: 3rem !important;
-        padding-right: 0 !important;
-        margin-bottom: 2.5rem;
-    }
-
-    .experience-item::after {
-        left: 12px !important;
-        right: auto !important;
-        width: 16px;
-        height: 16px;
-        top: 1.5rem;
-    }
-
-    /* Carte mobile */
-    .experience-card {
-        padding: 1.5rem;
-        border-radius: 15px;
-    }
-
-    .experience-card:hover {
-        transform: translateY(-5px);
-    }
-
-    /* En-tête mobile */
-    .experience-header {
+    .company-info {
         flex-direction: column;
         align-items: flex-start;
-        gap: 1rem;
-        margin-bottom: 1rem;
-    }
-
-    .company-logo {
-        width: 50px;
-        height: 50px;
-    }
-
-    .logo-text {
-        font-size: 1.2rem;
-    }
-
-    .experience-info h3 {
-        font-size: 1.1rem;
+        gap: 0.5rem;
     }
 
     .company-name {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
 
     .experience-duration {
@@ -463,9 +373,12 @@ export default {
         padding: 0.2rem 0.6rem;
     }
 
-    /* Contenu mobile */
+    .job-title {
+        font-size: 1rem;
+    }
+
     .project-title {
-        font-size: 1.1rem;
+        font-size: 1rem;
         margin-bottom: 0.8rem;
     }
 
@@ -474,60 +387,46 @@ export default {
         margin-bottom: 1.2rem;
     }
 
-    /* Stack technique mobile */
     .tech-stack {
-        gap: 0.4rem;
+        gap: 0.3rem;
         margin-bottom: 1.2rem;
     }
 
     .tech-tag {
-        font-size: 0.75rem;
-        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+        height: 22px;
     }
 
-    /* Réalisations mobile */
     .achievements {
-        gap: 0.6rem;
+        gap: 0.5rem;
     }
 
-    .achievement {
+    .achievement-item {
         font-size: 0.85rem;
-        align-items: flex-start;
     }
 
-    .achievement-icon {
-        font-size: 1rem;
-        margin-right: 0.6rem;
-        margin-top: 0.1rem;
-    }
-
-    /* Ajuster les animations AOS pour mobile */
-    [data-aos="fade-right"],
-    [data-aos="fade-left"] {
-        transform: translate3d(0, 30px, 0);
+    .achievement-dot {
+        margin-top: 0.4rem;
     }
 }
 
-/* Très petits écrans */
 @media (max-width: 480px) {
     .experience {
-        padding: 5rem 0.5rem 2rem;
+        padding: 60px 10px;
     }
 
-    .experience-item {
-        padding-left: 2rem !important;
+    .section-title {
+        font-size: 1.8rem;
+        letter-spacing: 1px;
     }
 
-    .experience-timeline::before {
-        left: 15px;
-    }
-
-    .experience-item::after {
-        left: 7px !important;
+    .experience-grid {
+        gap: 1.5rem;
     }
 
     .experience-card {
-        padding: 1.2rem;
+        padding: 0;
     }
 
     .project-description {
@@ -535,15 +434,13 @@ export default {
     }
 
     .tech-tag {
-        font-size: 0.7rem;
-        padding: 0.25rem 0.5rem;
+        font-size: 0.65rem;
+        padding: 0.15rem 0.4rem;
+        height: 20px;
     }
-}
 
-/* Améliorer les performances des animations */
-.experience-card,
-.tech-tag,
-.achievement {
-    will-change: transform;
+    .achievement-item {
+        font-size: 0.8rem;
+    }
 }
 </style>
