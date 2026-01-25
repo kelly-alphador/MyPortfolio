@@ -2,25 +2,78 @@
   <section class="experience" id="experience">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">mon expérience</h2>
+        <h2 class="section-title">Expérience</h2>
       </div>
       
       <div class="experience-grid">
+
+        <!-- Spray Info Experience (MOST RECENT) -->
+        <div class="experience-card">
+          <div class="experience-header">
+            <div class="company-info">
+              <h3 class="company-name">SPRAY INFO</h3>
+              <span class="experience-duration">Août 2024 - Décembre 2024</span>
+            </div>
+            <h4 class="job-title">Développeur .NET (Stagiaire)</h4>
+          </div>
+          
+          <div class="experience-content">
+            <h5 class="project-title">Plateforme E-commerce B2B – TAMAOIL</h5>
+            <p class="project-description">
+              Développement d'une plateforme de vente en ligne permettant aux clients d’acheter des produits 
+              et aux administrateurs de gérer les ventes, les stocks et les commandes. 
+              L’application inclut un système d’alertes pour les ruptures de stock, 
+              la gestion des avis clients et le paiement en ligne via PayPal.
+            </p>
+            
+            <div class="tech-stack">
+              <span class="tech-tag">ASP.NET MVC</span>
+              <span class="tech-tag">.NET Framework</span>
+              <span class="tech-tag">C#</span>
+              <span class="tech-tag">SQL Server</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">jQuery</span>
+              <span class="tech-tag">Bootstrap</span>
+            </div>
+            
+            <ul class="achievements">
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>Développement complet du système de gestion des commandes</span>
+              </li>
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>Mise en place des paiements en ligne via PayPal</span>
+              </li>
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>Système d’alerte pour les produits en rupture de stock</span>
+              </li>
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>Gestion des avis et commentaires clients</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
         <!-- WBS Experience -->
         <div class="experience-card">
           <div class="experience-header">
             <div class="company-info">
-              <h3 class="company-name">WBS ENTERPRISE</h3>
-              <span class="experience-duration">2023 - 2024</span>
+              <h3 class="company-name">WBS – World Business Solution</h3>
+              <span class="experience-duration">Septembre 2023 - Décembre 2023</span>
             </div>
-            <h4 class="job-title">Développeur Full-Stack</h4>
+            <h4 class="job-title">Développeur Full-Stack (Stagiaire)</h4>
           </div>
           
           <div class="experience-content">
-            <h5 class="project-title">Application de Gestion de Devis</h5>
+            <h5 class="project-title">Application de Gestion de Devis – Entreprise AINA (Tuléar)</h5>
             <p class="project-description">
-              Développement d'une application web complète pour la gestion automatisée des devis clients. 
-              Interface utilisateur moderne et intuitive avec dashboard analytique en temps réel.
+              Conception et développement d’une application web permettant la gestion complète des devis clients. 
+              La solution permet de gérer les sites des clients, les unités matérielles, les équipements, 
+              les devis et la génération automatique des devis en format PDF.
             </p>
             
             <div class="tech-stack">
@@ -34,65 +87,25 @@
             <ul class="achievements">
               <li class="achievement-item">
                 <div class="achievement-dot"></div>
-                <span>+40% efficacité des équipes commerciales</span>
+                <span>Automatisation de la génération des devis en PDF</span>
               </li>
               <li class="achievement-item">
                 <div class="achievement-dot"></div>
-                <span>Génération automatisée des devis</span>
+                <span>Gestion des clients, matériels et unités techniques</span>
               </li>
               <li class="achievement-item">
                 <div class="achievement-dot"></div>
-                <span>Interface responsive multi-plateforme</span>
+                <span>Interface moderne et responsive</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <!-- Spray Info Experience -->
-        <div class="experience-card">
-          <div class="experience-header">
-            <div class="company-info">
-              <h3 class="company-name">SPRAY INFO</h3>
-              <span class="experience-duration">2022 - 2023</span>
-            </div>
-            <h4 class="job-title">Développeur .NET</h4>
-          </div>
-          
-          <div class="experience-content">
-            <h5 class="project-title">Site E-commerce B2B</h5>
-            <p class="project-description">
-              Création d'une plateforme e-commerce robuste et sécurisée pour la vente en ligne B2B. 
-              Architecture scalable avec gestion avancée des stocks et système de paiement intégré.
-            </p>
-            
-            <div class="tech-stack">
-              <span class="tech-tag">ASP.NET MVC</span>
-              <span class="tech-tag">C#</span>
-              <span class="tech-tag">SQL Server</span>
-              <span class="tech-tag">Entity Framework</span>
-              <span class="tech-tag">Bootstrap</span>
-            </div>
-            
-            <ul class="achievements">
-              <li class="achievement-item">
-                <div class="achievement-dot"></div>
-                <span>Système de commande complet</span>
-              </li>
-              <li class="achievement-item">
-                <div class="achievement-dot"></div>
-                <span>Intégration paiement sécurisé</span>
-              </li>
-              <li class="achievement-item">
-                <div class="achievement-dot"></div>
-                <span>Dashboard administrateur avancé</span>
-              </li>
-            </ul>
-          </div>
-        </div>
       </div>
     </div>
   </section>
 </template>
+
 
 <script>
 export default {

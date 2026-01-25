@@ -7,13 +7,14 @@
         concepts en solutions digitales performantes avec une approche centrée
         sur l'utilisateur et la qualité.
       </p>
+
       <div class="about-description">
         <p>
-          Développeur Full-Stack .NET / Vue.js, passionné par la création de
-          solutions web et desktop modernes et performantes. Je maîtrise ASP.NET
-          MVC, ASP.NET Core Web API, WPF, ainsi que .NET Framework et .NET Core,
-          et j'intègre des interfaces utilisateur modernes avec Vue.js pour
-          transformer vos idées en applications robustes et maintenables.
+          Développeur <strong>Full-Stack .NET & Vue.js</strong>, je conçois des solutions web et desktop 
+          sur mesure. Mon expertise s'étend de la création d'architectures robustes avec 
+          <strong>ASP.NET Core Web API</strong> et <strong>MVC</strong>, au développement d'applications 
+          Windows via <strong>WPF</strong>. Côté front-end, j'exploite la puissance de 
+          <strong>Vue.js</strong> pour bâtir des interfaces modernes, réactives et centrées sur l'expérience utilisateur.
         </p>
       </div>
     </div>

@@ -2,210 +2,46 @@
   <section class="skills" id="skills">
     <div class="container">
       <div class="section-header" data-aos="fade-up" data-aos-duration="1000">
-        <h2 class="section-title">mes compétences</h2>
+        <h2 class="section-title"> compétences</h2>
       </div>
-      <div class="scroll-wrapper">
-        <div id="icons-list">
-          <!-- HTML -->
-          <div class="techno-container">
+      
+      <div 
+        class="scroll-area" 
+        ref="scrollArea"
+        @mousedown="startDrag"
+        @touchstart="handleTouchStart"
+      >
+        <div 
+          class="icons-container"
+          ref="iconsContainer"
+          :style="{ transform: `translateX(${scrollOffset}px)` }"
+        >
+          <!-- Liste originale -->
+          <div 
+            v-for="(tech, index) in technologies" 
+            :key="index" 
+            class="techno-container"
+          >
             <img
-              src="@/assets/images/html.svg"
-              alt="HTML"
+              :src="getImageUrl(tech.icon)"
+              :alt="tech.name"
               class="techno-icon"
             />
-            <span>HTML</span>
+            <span>{{ tech.name }}</span>
           </div>
-          <!-- CSS -->
-          <div class="techno-container">
-            <img src="@/assets/images/css.svg" alt="CSS" class="techno-icon" />
-            <span>CSS</span>
-          </div>
-          <!-- JavaScript -->
-          <div class="techno-container">
+          
+          <!-- Duplication pour l'effet infini -->
+          <div 
+            v-for="(tech, index) in technologies" 
+            :key="'dup-' + index" 
+            class="techno-container"
+          >
             <img
-              src="@/assets/images/javascript.svg"
-              alt="JavaScript"
+              :src="getImageUrl(tech.icon)"
+              :alt="tech.name"
               class="techno-icon"
             />
-            <span>JavaScript</span>
-          </div>
-          <!-- C# -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/csharp.svg"
-              alt="C#"
-              class="techno-icon"
-            />
-            <span>C#</span>
-          </div>
-          <!-- .NET -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/dotnet.svg"
-              alt=".NET"
-              class="techno-icon"
-            />
-            <span>.NET</span>
-          </div>
-          <!-- Vue.js -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/vue.svg"
-              alt="Vue.js"
-              class="techno-icon"
-            />
-            <span>Vue.js</span>
-          </div>
-          <!-- MySQL -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/mysql.svg"
-              alt="MySQL"
-              class="techno-icon"
-            />
-            <span>MySQL</span>
-          </div>
-          <!-- Docker -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/docker.svg"
-              alt="Docker"
-              class="techno-icon"
-            />
-            <span>Docker</span>
-          </div>
-          <!-- Git -->
-          <div class="techno-container">
-            <img src="@/assets/images/git.svg" alt="Git" class="techno-icon" />
-            <span>Git</span>
-          </div>
-          <!-- Bootstrap -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/bootstrap.svg"
-              alt="Bootstrap"
-              class="techno-icon"
-            />
-            <span>Bootstrap</span>
-          </div>
-          <!-- Tailwind -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/tailwind.svg"
-              alt="Tailwind CSS"
-              class="techno-icon"
-            />
-            <span>Tailwind</span>
-          </div>
-          <!-- jQuery -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/jquery.svg"
-              alt="jQuery"
-              class="techno-icon"
-            />
-            <span>jQuery</span>
-          </div>
-          <!-- Duplication pour effet infini -->
-          <!-- HTML -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/html.svg"
-              alt="HTML"
-              class="techno-icon"
-            />
-            <span>HTML</span>
-          </div>
-          <!-- CSS -->
-          <div class="techno-container">
-            <img src="@/assets/images/css.svg" alt="CSS" class="techno-icon" />
-            <span>CSS</span>
-          </div>
-          <!-- JavaScript -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/javascript.svg"
-              alt="JavaScript"
-              class="techno-icon"
-            />
-            <span>JavaScript</span>
-          </div>
-          <!-- C# -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/csharp.svg"
-              alt="C#"
-              class="techno-icon"
-            />
-            <span>C#</span>
-          </div>
-          <!-- .NET -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/dotnet.svg"
-              alt=".NET"
-              class="techno-icon"
-            />
-            <span>.NET</span>
-          </div>
-          <!-- Vue.js -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/vue.svg"
-              alt="Vue.js"
-              class="techno-icon"
-            />
-            <span>Vue.js</span>
-          </div>
-          <!-- MySQL -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/mysql.svg"
-              alt="MySQL"
-              class="techno-icon"
-            />
-            <span>MySQL</span>
-          </div>
-          <!-- Docker -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/docker.svg"
-              alt="Docker"
-              class="techno-icon"
-            />
-            <span>Docker</span>
-          </div>
-          <!-- Git -->
-          <div class="techno-container">
-            <img src="@/assets/images/git.svg" alt="Git" class="techno-icon" />
-            <span>Git</span>
-          </div>
-          <!-- Bootstrap -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/bootstrap.svg"
-              alt="Bootstrap"
-              class="techno-icon"
-            />
-            <span>Bootstrap</span>
-          </div>
-          <!-- Tailwind -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/tailwind.svg"
-              alt="Tailwind CSS"
-              class="techno-icon"
-            />
-            <span>Tailwind</span>
-          </div>
-          <!-- jQuery -->
-          <div class="techno-container">
-            <img
-              src="@/assets/images/jquery.svg"
-              alt="jQuery"
-              class="techno-icon"
-            />
-            <span>jQuery</span>
+            <span>{{ tech.name }}</span>
           </div>
         </div>
       </div>
@@ -214,7 +50,164 @@
 </template>
 
 <script setup>
-// Pas besoin d'imports supplémentaires
+import { ref, onMounted, onUnmounted } from 'vue'
+
+// Configuration des technologies
+const technologies = [
+  { name: 'HTML', icon: 'html.svg' },
+  { name: 'CSS', icon: 'css.svg' },
+  { name: 'JavaScript', icon: 'javascript.svg' },
+  { name: 'C#', icon: 'csharp.svg' },
+  { name: '.NET', icon: 'dotnet.svg' },
+  { name: 'Vue.js', icon: 'vue.svg' },
+  { name: 'MySQL', icon: 'mysql.svg' },
+  { name: 'Docker', icon: 'docker.svg' },
+  { name: 'Git', icon: 'git.svg' },
+  { name: 'Bootstrap', icon: 'bootstrap.svg' },
+  { name: 'Tailwind', icon: 'tailwind.svg' },
+  { name: 'jQuery', icon: 'jquery.svg' },
+]
+
+const scrollArea = ref(null)
+const iconsContainer = ref(null)
+const scrollOffset = ref(0)
+const autoScrollSpeed = ref(1)
+const isDragging = ref(false)
+const dragStartX = ref(0)
+const dragStartOffset = ref(0)
+const animationFrameId = ref(null)
+
+// Fonction pour générer l'URL des images
+const getImageUrl = (iconName) => {
+  return new URL(`/src/assets/images/${iconName}`, import.meta.url).href
+}
+
+// Animation automatique
+const animate = () => {
+  if (!isDragging.value && iconsContainer.value) {
+    scrollOffset.value -= autoScrollSpeed.value
+    
+    // Réinitialiser quand on arrive à la fin
+    const containerWidth = iconsContainer.value.offsetWidth / 2
+    if (Math.abs(scrollOffset.value) >= containerWidth) {
+      scrollOffset.value = 0
+    }
+  }
+  
+  animationFrameId.value = requestAnimationFrame(animate)
+}
+
+// Démarrer le drag (desktop)
+const startDrag = (e) => {
+  if (e.type === 'mousedown') {
+    isDragging.value = true
+    dragStartX.value = e.clientX
+    dragStartOffset.value = scrollOffset.value
+    
+    document.addEventListener('mousemove', onDragMove)
+    document.addEventListener('mouseup', stopDrag)
+    
+    scrollArea.value?.classList.add('dragging')
+    e.preventDefault()
+  }
+}
+
+// Gestion du touch sur mobile
+const handleTouchStart = (e) => {
+  isDragging.value = true
+  dragStartX.value = e.touches[0].clientX
+  dragStartOffset.value = scrollOffset.value
+  
+  scrollArea.value?.addEventListener('touchmove', handleTouchMove, { passive: false })
+  scrollArea.value?.addEventListener('touchend', handleTouchEnd)
+  
+  scrollArea.value?.classList.add('dragging')
+}
+
+const handleTouchMove = (e) => {
+  if (!isDragging.value) return
+  
+  const touch = e.touches[0]
+  const currentX = touch.clientX
+  const deltaX = currentX - dragStartX.value
+  
+  scrollOffset.value = dragStartOffset.value + deltaX * 1.5
+  
+  if (Math.abs(deltaX) > 5) {
+    e.preventDefault()
+  }
+}
+
+const handleTouchEnd = () => {
+  isDragging.value = false
+  
+  scrollArea.value?.removeEventListener('touchmove', handleTouchMove)
+  scrollArea.value?.removeEventListener('touchend', handleTouchEnd)
+  
+  scrollArea.value?.classList.remove('dragging')
+  
+  setTimeout(() => {
+    if (!isDragging.value) {
+      autoScrollSpeed.value = 1
+    }
+  }, 2000)
+}
+
+// Pendant le drag (desktop)
+const onDragMove = (e) => {
+  if (!isDragging.value) return
+  
+  const currentX = e.clientX
+  const deltaX = currentX - dragStartX.value
+  scrollOffset.value = dragStartOffset.value + deltaX * 1.5
+}
+
+// Arrêter le drag (desktop)
+const stopDrag = () => {
+  isDragging.value = false
+  
+  document.removeEventListener('mousemove', onDragMove)
+  document.removeEventListener('mouseup', stopDrag)
+  
+  scrollArea.value?.classList.remove('dragging')
+  
+  setTimeout(() => {
+    if (!isDragging.value) {
+      autoScrollSpeed.value = 1
+    }
+  }, 2000)
+}
+
+// Pause au survol (desktop seulement)
+const pauseAutoScroll = () => {
+  autoScrollSpeed.value = 0
+}
+
+const resumeAutoScroll = () => {
+  if (!isDragging.value) {
+    autoScrollSpeed.value = 1
+  }
+}
+
+onMounted(() => {
+  animate()
+  
+  scrollArea.value?.addEventListener('mouseenter', pauseAutoScroll)
+  scrollArea.value?.addEventListener('mouseleave', resumeAutoScroll)
+  
+  if ('ontouchstart' in window) {
+    autoScrollSpeed.value = 0.8
+  }
+})
+
+onUnmounted(() => {
+  if (animationFrameId.value) {
+    cancelAnimationFrame(animationFrameId.value)
+  }
+  
+  scrollArea.value?.removeEventListener('mouseenter', pauseAutoScroll)
+  scrollArea.value?.removeEventListener('mouseleave', resumeAutoScroll)
+})
 </script>
 
 <style scoped>
@@ -262,33 +255,72 @@
   background: var(--emerald-primary);
 }
 
-.scroll-wrapper {
-  overflow: hidden;
+/* Zone de défilement */
+.scroll-area {
+  position: relative;
   width: 100%;
-  margin-top: 100px;
-  padding: 20px;
+  height: 200px;
+  margin-top: 60px;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-x pan-y;
 }
 
-#icons-list {
+.scroll-area.dragging {
+  cursor: grabbing;
+}
+
+/* SUPPRIMÉ: Les dégradés verts sur les côtés */
+/* .scroll-area::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(80, 200, 120, 0.1) 0%,
+    transparent 10%,
+    transparent 90%,
+    rgba(80, 200, 120, 0.1) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+} */
+
+/* Indicateur texte */
+.scroll-area::after {
+  content: "← Glissez pour explorer →";
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--emerald-primary);
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.scroll-area:hover::after {
+  opacity: 0.7;
+}
+
+/* Conteneur des icônes */
+.icons-container {
   display: flex;
   gap: 60px;
-  animation: scroll-left 30s linear infinite;
-  width: fit-content;
+  height: 100%;
+  width: max-content;
+  will-change: transform;
+  transition: transform 0.1s linear;
+  padding: 0 20px;
 }
 
-#icons-list:hover {
-  animation-play-state: paused;
-}
-
-@keyframes scroll-left {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
+/* Style des technologies */
 .techno-container {
   text-align: center;
   color: var(--text-secondary);
@@ -298,7 +330,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 15px;
+  padding: 10px;
 }
 
 .techno-container span {
@@ -321,7 +355,7 @@
   height: 60px;
   object-fit: contain;
   transition: all 0.3s ease;
-  /* Les SVGs téléchargés ont déjà leurs couleurs */
+  pointer-events: none;
 }
 
 .techno-container:hover .techno-icon {
@@ -358,7 +392,7 @@
     padding: 80px 15px;
   }
 
-  #icons-list {
+  .icons-container {
     gap: 50px;
   }
 
@@ -369,6 +403,13 @@
   .techno-icon {
     width: 70px;
     height: 70px;
+  }
+  
+  /* Toujours montrer l'indicateur sur mobile */
+  .scroll-area::after {
+    opacity: 0.8;
+    animation: pulse 2s infinite;
+    font-size: 0.85rem;
   }
 }
 
@@ -382,7 +423,7 @@
     letter-spacing: 2px;
   }
 
-  #icons-list {
+  .icons-container {
     gap: 40px;
   }
 
@@ -399,6 +440,11 @@
   .techno-container span {
     font-size: 0.9rem;
   }
+  
+  .scroll-area {
+    margin-top: 40px;
+    height: 180px;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -411,8 +457,9 @@
     letter-spacing: 1px;
   }
 
-  #icons-list {
+  .icons-container {
     gap: 30px;
+    padding: 0 15px;
   }
 
   .techno-container {
@@ -426,6 +473,51 @@
 
   .techno-container span {
     font-size: 0.8rem;
+  }
+  
+  .scroll-area {
+    height: 160px;
+    margin-top: 30px;
+  }
+  
+  .scroll-area::after {
+    font-size: 0.75rem;
+    bottom: -30px;
+  }
+}
+
+/* Support pour les appareils tactiles */
+@media (hover: none) and (pointer: coarse) {
+  .scroll-area {
+    cursor: default;
+  }
+  
+  .scroll-area.dragging {
+    cursor: default;
+  }
+  
+  .scroll-area::after {
+    opacity: 0.8 !important;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.9; }
+  }
+  
+  /* Désactiver les effets hover sur mobile */
+  .techno-container:hover {
+    transform: none;
+  }
+  
+  .techno-container:hover span {
+    color: var(--text-primary);
+  }
+  
+  .techno-container:hover .techno-icon {
+    filter: none;
+    transform: none;
   }
 }
 </style>

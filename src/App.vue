@@ -10,12 +10,54 @@
 
         <!-- Navigation Links -->
         <div class="nav-links" :class="{ 'mobile-open': isMobileMenuOpen }">
-          <a href="#home" class="nav-link" @click="closeMobileMenu">Accueil</a>
-          <a href="#about" class="nav-link" @click="closeMobileMenu">À propos</a>
-          <a href="#skills" class="nav-link" @click="closeMobileMenu">Compétences</a>
-          <a href="#experience" class="nav-link" @click="closeMobileMenu">Expérience</a>
-          <a href="#projects" class="nav-link" @click="closeMobileMenu">Projets</a>
-          <a href="#contact" class="nav-link" @click="closeMobileMenu">Contact</a>
+          <a 
+            href="#home" 
+            class="nav-link" 
+            :class="{ 'active': activeSection === 'home' }"
+            @click.prevent="scrollToSection('home')"
+          >
+            Accueil
+          </a>
+          <a 
+            href="#about" 
+            class="nav-link" 
+            :class="{ 'active': activeSection === 'about' }"
+            @click.prevent="scrollToSection('about')"
+          >
+            À propos
+          </a>
+          <a 
+            href="#skills" 
+            class="nav-link" 
+            :class="{ 'active': activeSection === 'skills' }"
+            @click.prevent="scrollToSection('skills')"
+          >
+            Compétences
+          </a>
+          <a 
+            href="#experience" 
+            class="nav-link" 
+            :class="{ 'active': activeSection === 'experience' }"
+            @click.prevent="scrollToSection('experience')"
+          >
+            Expérience
+          </a>
+          <a 
+            href="#projects" 
+            class="nav-link" 
+            :class="{ 'active': activeSection === 'projects' }"
+            @click.prevent="scrollToSection('projects')"
+          >
+            Projets
+          </a>
+          <a 
+            href="#contact" 
+            class="nav-link" 
+            :class="{ 'active': activeSection === 'contact' }"
+            @click.prevent="scrollToSection('contact')"
+          >
+            Contact
+          </a>
         </div>
 
         <!-- Download CV Button -->
@@ -160,6 +202,9 @@ export default {
     this.setupScrollSpy();
     window.addEventListener('resize', this.handleResize);
     this.handleResize();
+    
+    // Initialiser la classe active sur le premier lien
+    this.updateActiveLinks();
   },
   beforeUnmount() {
     window.removeEventListener('resize', this.handleResize);
@@ -195,6 +240,7 @@ export default {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             this.activeSection = entry.target.id;
+            this.updateActiveLinks();
           }
         });
       }, observerOptions);
@@ -205,6 +251,27 @@ export default {
           observer.observe(section);
         }
       });
+    },
+    updateActiveLinks() {
+      // Attendre le prochain tick pour s'assurer que le DOM est mis à jour
+      this.$nextTick(() => {
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${this.activeSection}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+    },
+    scrollToSection(sectionId) {
+      this.activeSection = sectionId;
+      this.updateActiveLinks();
+      this.closeMobileMenu();
+      
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
     },
     handleResize() {
       if (window.innerWidth > 768) {
@@ -338,14 +405,14 @@ body {
 }
 
 .nav-link:hover {
-  /*color: var(--emerald-primary);*/
+  color: var(--emerald-primary);
 }
 
 .nav-link:hover::after {
   width: 100%;
 }
 
-/* Active Link */
+/* Active Link - LIGNE VERTE */
 .nav-link.active {
   color: var(--emerald-primary);
 }
@@ -357,7 +424,7 @@ body {
 /* Download CV Button */
 .download-btn {
   padding: 12px 28px;
-  background: linear-gradient(135deg, var(--emerald-primary), var(--emerald-dark));
+  background: linear-gradient(135deg, #33c965, var(--emerald-dark));
   color: var(--bg-dark);
   text-decoration: none;
   border-radius: 8px;
@@ -724,6 +791,11 @@ body {
 
   .nav-link::after {
     display: none;
+  }
+
+  /* Active state pour mobile */
+  .nav-link.active {
+    background: rgba(80, 200, 120, 0.1);
   }
 
   .download-btn {

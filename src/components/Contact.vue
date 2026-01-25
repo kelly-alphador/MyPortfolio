@@ -514,7 +514,7 @@ export default {
 }
 
 .submit-btn {
-  background: var(--emerald-primary);
+  background: linear-gradient(135deg, #33c965, var(--emerald-dark));
   color: #161916;
   border: none;
   padding: 0.75rem 2rem;
@@ -533,8 +533,8 @@ export default {
 }
 
 .submit-btn:hover:not(:disabled) {
-  background: var(--emerald-dark);
   transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(80, 200, 120, 0.3);
 }
 
 .submit-btn:disabled {
