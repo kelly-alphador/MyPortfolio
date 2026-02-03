@@ -3,18 +3,18 @@
     <div class="about-container">
       <h2 class="about-title">a propos</h2>
       <p class="about-intro">
-        Passionné par le développement et l'innovation, je transforme des
-        concepts en solutions digitales performantes avec une approche centrée
-        sur l'utilisateur et la qualité.
+       Passionné par le développement et l’innovation, je transforme des problématiques réelles en solutions digitales performantes, avec une approche centrée sur l’utilisateur, l’efficacité et la qualité.
       </p>
 
       <div class="about-description">
         <p>
-          Développeur <strong>Full-Stack .NET & Vue.js</strong>, je conçois des solutions web et desktop 
-          sur mesure. Mon expertise s'étend de la création d'architectures robustes avec 
-          <strong>ASP.NET Core Web API</strong> et <strong>MVC</strong>, au développement d'applications 
-          Windows via <strong>WPF</strong>. Côté front-end, j'exploite la puissance de 
-          <strong>Vue.js</strong> pour bâtir des interfaces modernes, réactives et centrées sur l'expérience utilisateur.
+            Développeur Full-Stack .NET & Vue.js et actuellement étudiant en Master à l’École Nationale d’Informatique (ENI), j’accompagne les entreprises et les porteurs de projets dans la résolution de leurs défis numériques. J’analyse les besoins, identifie les points de blocage et conçois des applications web et desktop qui optimisent les processus, réduisent les pertes de temps et améliorent la gestion des activités.
+        </p>
+        <p>
+          Mon expertise couvre la conception d’architectures robustes avec ASP.NET Core Web API et MVC, ainsi que le développement d’applications Windows via WPF et Windows Forms. Côté front-end, j’utilise Vue.js pour créer des interfaces modernes, intuitives et centrées sur l’expérience utilisateur
+        </p>
+        <p>
+          Mon objectif n’est pas seulement de développer des applications, mais de proposer des solutions concrètes qui apportent un réel impact aux utilisateurs et aux organisations.
         </p>
       </div>
     </div>

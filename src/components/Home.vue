@@ -7,9 +7,18 @@
         <span ref="typedElement"></span>
         <span class="typed-cursor">|</span>
       </div>
-      <!-- Image ajoutée ici -->
+      <!-- Image avec animation de flottement -->
       <div class="hero-avatar">
-        <img src="@/assets/images/avatar.png" alt="Photo de Kelly Alphador" />
+        <div class="avatar-container">
+          <div class="avatar-decoration">
+            <span class="decoration-circle circle-1"></span>
+            <span class="decoration-circle circle-2"></span>
+            <span class="decoration-circle circle-3"></span>
+            <span class="decoration-circle circle-4"></span>
+            <span class="decoration-circle circle-5"></span>
+          </div>
+          <img src="@/assets/images/avatar.png" alt="Photo de Kelly Alphador" />
+        </div>
       </div>
     </div>
   </section>
@@ -157,21 +166,117 @@ export default {
   margin-bottom: 1rem;
 }
 
-/* Style pour l'avatar - sans bordure ni ombre */
+/* Style pour l'avatar avec animation de flottement */
 .hero-avatar {
   width: 200px;
   height: 200px;
-  border-radius: 50%;
-  overflow: hidden;
   opacity: 0;
   animation: fadeInUp 1s ease-out 1.2s forwards;
-  /* Bordure et ombre retirées */
+  position: relative;
 }
 
-.hero-avatar img {
+.avatar-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: float 3s ease-in-out infinite;
+}
+
+.avatar-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+}
+
+/* Animation de flottement vertical */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Décoration autour de l'image */
+.avatar-decoration {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110%;
+  height: 110%;
+  z-index: 1;
+}
+
+.decoration-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid rgba(80, 200, 120, 0.3);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.circle-1 {
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  animation-delay: 0s;
+}
+
+.circle-2 {
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  border-color: rgba(80, 200, 120, 0.2);
+  animation-delay: 0.5s;
+}
+
+.circle-3 {
+  top: 15%;
+  left: 15%;
+  width: 70%;
+  height: 70%;
+  border-color: rgba(80, 200, 120, 0.15);
+  animation-delay: 1s;
+}
+
+.circle-4 {
+  top: 20%;
+  left: 20%;
+  width: 60%;
+  height: 60%;
+  border-color: rgba(80, 200, 120, 0.1);
+  animation-delay: 1.5s;
+}
+
+.circle-5 {
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  border-color: rgba(80, 200, 120, 0.05);
+  animation-delay: 2s;
+}
+
+/* Animation de pulsation pour les cercles */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.4;
+  }
 }
 
 /* Curseur personnalisé pour l'animation de typing */
@@ -251,6 +356,19 @@ export default {
 
   .hero-role {
     font-size: clamp(1rem, 2.5vw, 1.5rem);
+  }
+  
+  /* Ajustement de l'animation sur mobile */
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
   }
 }
 

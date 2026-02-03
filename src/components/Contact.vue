@@ -223,6 +223,9 @@
 </template>
 
 <script>
+// Import d'EmailJS
+import emailjs from '@emailjs/browser';
+
 export default {
   name: "Contact",
   data() {
@@ -240,6 +243,8 @@ export default {
   },
   mounted() {
     this.initAnimations();
+    // Initialisation d'EmailJS avec votre Public Key
+    emailjs.init("7AThkC_GXYx3nBye8");
   },
   methods: {
     initAnimations() {
@@ -299,31 +304,87 @@ export default {
       this.submitStatus = null;
 
       try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-
-        this.submitStatus = {
-          type: "success",
-          message:
-            "Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.",
+        // Préparer les paramètres pour EmailJS
+        // NOTE IMPORTANTE : Votre template utilise {{from_subject}} mais aussi {{subject}}
+        // Je vais utiliser les deux pour être sûr
+        const templateParams = {
+          from_name: this.form.name,       // Pour {{from_name}} dans le template
+          email: this.form.email,          // Pour {{email}} dans le template
+          reply_to: this.form.email,       // Pour {{reply_to}} dans le template
+          subject: this.form.subject,      // Pour {{subject}} dans le template (peut-être utilisé)
+          from_subject: this.form.subject, // Pour {{from_subject}} dans le subject du template
+          message: this.form.message,      // Pour {{message}} dans le template
+          date: new Date().toLocaleDateString('fr-FR', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+          }),
+          time: new Date().toLocaleTimeString('fr-FR', {
+            hour: '2-digit',
+            minute: '2-digit'
+          })
         };
 
-        this.form = {
-          name: "",
-          email: "",
-          subject: "",
-          message: "",
-        };
+        console.log("📤 Envoi du formulaire avec EmailJS...");
+        console.log("Paramètres:", templateParams);
+
+        // Envoi avec EmailJS - VOS IDs
+        const response = await emailjs.send(
+          "service_7drnroj",    // Votre Service ID
+          "template_qt74mni",   // Votre Template ID
+          templateParams,
+          "7AThkC_GXYx3nBye8"   // Votre Public Key
+        );
+
+        console.log("✅ Réponse EmailJS:", response);
+
+        if (response.status === 200) {
+          this.submitStatus = {
+            type: "success",
+            message: "🎉 Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.",
+          };
+
+          // Réinitialiser le formulaire
+          this.form = {
+            name: "",
+            email: "",
+            subject: "",
+            message: "",
+          };
+        }
       } catch (error) {
+        console.error("❌ Erreur EmailJS:", error);
+        
+        let errorMessage = "Erreur lors de l'envoi du message. Veuillez réessayer.";
+        
+        // Messages d'erreur plus précis
+        if (error.text) {
+          console.error("Détails de l'erreur:", error.text);
+          
+          if (error.text.includes("Invalid user ID") || error.text.includes("Public Key")) {
+            errorMessage = "Problème de configuration. Vérifiez votre Public Key.";
+          } else if (error.text.includes("Service not found")) {
+            errorMessage = "Service ID incorrect. Vérifiez votre Service ID.";
+          } else if (error.text.includes("Template not found")) {
+            errorMessage = "Template ID incorrect. Vérifiez votre Template ID.";
+          } else if (error.text.includes("Limit exceeded")) {
+            errorMessage = "Limite d'envoi atteinte. Réessayez plus tard.";
+          }
+        }
+        
         this.submitStatus = {
           type: "error",
-          message: "Erreur lors de l'envoi du message. Veuillez réessayer.",
+          message: errorMessage,
         };
       } finally {
         this.isSubmitting = false;
 
-        setTimeout(() => {
-          this.submitStatus = null;
-        }, 5000);
+        // Cacher le message après 5 secondes
+        if (this.submitStatus) {
+          setTimeout(() => {
+            this.submitStatus = null;
+          }, 5000);
+        }
       }
     },
   },

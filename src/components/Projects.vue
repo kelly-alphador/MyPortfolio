@@ -78,7 +78,10 @@ export default {
   {
     title: "ShopMaster",
     category: "Application Web E-commerce",
-    description: "Application e-commerce complète permettant aux clients d’acheter des produits en ligne sans se déplacer. Les administrateurs peuvent gérer les ventes, les produits et les commandes. Le paiement est sécurisé via PayPal avec création de compte, confirmation par email et envoi automatique de facture après achat.",
+    description: `ShopMaster est une application e-commerce conçue pour répondre aux difficultés rencontrées par les commerces traditionnels. Avant sa mise en place, les clients devaient se déplacer pour effectuer leurs achats, ce qui entraînait une perte de temps. De plus, la gestion des ventes se faisait manuellement via Excel, rendant le suivi du stock peu fiable. Les ruptures de stock n'étaient pas toujours détectées à temps, ce qui provoquait des frustrations lorsque les clients cherchaient des produits indisponibles.
+
+L'application permet désormais aux clients d'acheter des produits en ligne facilement, tandis que les administrateurs disposent d'un système centralisé pour gérer les produits, les ventes, les commandes et le stock en temps réel. ShopMaster inclut un paiement sécurisé via PayPal, la création de comptes clients, une confirmation par email après achat et l'envoi automatique de factures. Cette solution améliore l'expérience client, réduit les pertes liées aux erreurs de gestion et optimise le suivi des ventes.`
+,
     image: shopMasterImg,
     imageAlt: "Capture d'écran ShopMaster",
     demoLink: "#",
@@ -88,7 +91,14 @@ export default {
   {
     title: "ChronoDev",
     category: "Application Web de Gestion de Projets",
-    description: "Application de gestion de temps avec trois rôles : Manager, Chef de projet et Développeur. Les développeurs et chefs de projet saisissent leurs heures de travail par projet. Le manager peut valider ou refuser les saisies et suivre la productivité de chaque membre de l’équipe.",
+    description: `ChronoDev est une application de gestion des feuilles de temps conçue pour les entreprises informatiques. Avant sa mise en place, le suivi des heures de travail se faisait de manière informelle ou via des fichiers Excel, ce qui rendait difficile le contrôle du temps réellement passé sur chaque projet. Les managers manquaient de visibilité sur la productivité des équipes, et les développeurs n’avaient pas toujours de retour clair sur la validation de leurs heures.
+
+L’application introduit un système structuré avec trois rôles : Manager, Chef de projet et Développeur. Les développeurs et chefs de projet saisissent leurs heures de travail par projet et par jour. Le manager peut consulter ces saisies, puis les valider ou les refuser avec un commentaire expliquant la raison du refus.
+
+Chaque utilisateur peut suivre l’état de ses déclarations : les heures validées apparaissent en vert, celles refusées en rouge, avec accès au détail du motif de refus. L’application permet également de visualiser le temps restant alloué à un projet, offrant ainsi une meilleure anticipation des délais et une gestion plus efficace des ressources.
+
+ChronoDev améliore la transparence, facilite le suivi de la productivité et aide les entreprises à mieux contrôler l’avancement réel de leurs projets.`,
+  
     image: chronoDevImg,
     imageAlt: "Capture d'écran ChronoDev",
     demoLink: "#",
@@ -98,7 +108,11 @@ export default {
   {
     title: "Portfolio Interactif",
     category: "Portfolio Web",
-    description: "Portfolio personnel moderne présentant mes compétences, projets et technologies. Interface responsive avec animations et design professionnel.",
+     description: `Ce portfolio interactif a été conçu pour répondre à un besoin essentiel : présenter clairement mes compétences et mes projets dans un format professionnel, moderne et accessible à tous. Avant sa création, mes réalisations étaient dispersées entre différents supports, ce qui rendait difficile pour un recruteur ou un client d’avoir une vision globale de mon profil et de mon savoir-faire.
+
+L’objectif de cette plateforme est de centraliser mes projets, démontrer mes compétences techniques à travers des cas concrets et offrir une navigation fluide et agréable. Le site met en avant des projets réels, chacun présenté avec le problème rencontré, la solution développée et les technologies utilisées.
+
+Grâce à une interface responsive, des animations modernes et un design soigné, ce portfolio reflète à la fois mes compétences en développement front-end et mon attention à l’expérience utilisateur. Il constitue un outil professionnel qui facilite la mise en relation avec des recruteurs, des entreprises et des clients potentiels.`,
     image: portfolioImg,
     imageAlt: "Capture d'écran Portfolio",
     demoLink: "#",
@@ -108,7 +122,11 @@ export default {
   {
     title: "Algorithme de Dantzig",
     category: "Application Desktop",
-    description: "Application desktop permettant de calculer le chemin minimal et maximal dans un graphe en utilisant l’algorithme de Dantzig. Visualisation des sommets et des arcs avec interface graphique.",
+    description: `Cette application desktop a été développée pour faciliter l’apprentissage des algorithmes de graphes, notamment l’algorithme de Dantzig utilisé pour déterminer les chemins minimaux et maximaux. Avant sa mise en place, les étudiants devaient effectuer ces calculs manuellement, ce qui demandait beaucoup de temps et augmentait le risque d’erreurs, surtout pour les graphes complexes.
+
+L’application permet de modéliser un graphe à travers une interface graphique intuitive, avec visualisation des sommets et des arcs. L’utilisateur peut ensuite lancer automatiquement le calcul des chemins minimaux et maximaux, obtenant des résultats rapides et fiables.
+
+Cette solution aide les étudiants à mieux comprendre le fonctionnement de l’algorithme grâce à la visualisation, tout en réduisant le temps consacré aux calculs manuels. Elle constitue ainsi un outil pédagogique interactif qui rend l’apprentissage plus efficace et plus clair.`,
     image: dantzigImg,
     imageAlt: "Capture d'écran Algorithme de Dantzig",
     demoLink: "#",

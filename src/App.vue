@@ -151,6 +151,31 @@
       </div>
     </div>
 
+    <!-- Back to Top Arrow -->
+    <button 
+      class="back-to-top" 
+      :class="{ 'visible': showBackToTop }"
+      @click="scrollToTop"
+      aria-label="Retour en haut"
+    >
+      <svg 
+        class="arrow-icon" 
+        width="24" 
+        height="24" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path 
+          d="M12 4L12 20M12 4L18 10M12 4L6 10" 
+          stroke="currentColor" 
+          stroke-width="2" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+
     <!-- Particles Background -->
     <div class="particles" ref="particles"></div>
   </div>
@@ -183,7 +208,8 @@ export default {
     return {
       isMobileMenuOpen: false,
       activeSection: 'home',
-      sections: ['home', 'about', 'skills', 'experience', 'projects', 'contact']
+      sections: ['home', 'about', 'skills', 'experience', 'projects', 'contact'],
+      showBackToTop: false
     };
   },
   computed: {
@@ -201,6 +227,7 @@ export default {
     this.createParticles();
     this.setupScrollSpy();
     window.addEventListener('resize', this.handleResize);
+    window.addEventListener('scroll', this.handleScroll);
     this.handleResize();
     
     // Initialiser la classe active sur le premier lien
@@ -208,6 +235,7 @@ export default {
   },
   beforeUnmount() {
     window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
     createParticles() {
@@ -272,6 +300,17 @@ export default {
       if (section) {
         section.scrollIntoView({ behavior: 'smooth' });
       }
+    },
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      this.activeSection = 'home';
+      this.updateActiveLinks();
+    },
+    handleScroll() {
+      this.showBackToTop = window.scrollY > 500;
     },
     handleResize() {
       if (window.innerWidth > 768) {
@@ -695,6 +734,101 @@ body {
   }
 }
 
+/* Back to Top Arrow */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--emerald-primary), var(--emerald-dark));
+  border: none;
+  border-radius: 50%;
+  color: var(--bg-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(80, 200, 120, 0.3);
+  animation: continuousBounce 2s ease-in-out infinite;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  transform: translateY(0) scale(1.1);
+  box-shadow: 0 8px 25px rgba(80, 200, 120, 0.4);
+  animation: continuousBounceFast 1s ease-in-out infinite;
+}
+
+.arrow-icon {
+  transition: transform 0.3s ease;
+  animation: arrowFloat 2s ease-in-out infinite;
+}
+
+.back-to-top:hover .arrow-icon {
+  animation: arrowFloatFast 1s ease-in-out infinite;
+}
+
+/* Animation de flottement continue pour la flèche */
+@keyframes continuousBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes continuousBounceFast {
+  0%, 100% {
+    transform: translateY(0) scale(1.1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.1);
+  }
+}
+
+/* Animation de la flèche qui bouge */
+@keyframes arrowFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(2px);
+  }
+}
+
+@keyframes arrowFloatFast {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(3px);
+  }
+}
+
 /* Responsive */
 @media (max-width: 1200px) {
   .social-sidebar {
@@ -827,6 +961,23 @@ body {
     height: 1.5px;
     background: rgba(80, 200, 120, 0.4);
   }
+
+  .back-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    animation: continuousBounceMobile 2s ease-in-out infinite;
+  }
+  
+  @keyframes continuousBounceMobile {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
 }
 
 @media (max-width: 480px) {
@@ -859,6 +1010,13 @@ body {
     height: 200px;
     filter: blur(25px);
     opacity: 0.4;
+  }
+
+  .back-to-top {
+    bottom: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
   }
 }
 </style>
