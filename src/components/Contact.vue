@@ -325,7 +325,7 @@ export default {
           })
         };
 
-        console.log("📤 Envoi du formulaire avec EmailJS...");
+        console.log("Envoi du formulaire avec EmailJS...");
         console.log("Paramètres:", templateParams);
 
         // Envoi avec EmailJS - VOS IDs
@@ -336,12 +336,12 @@ export default {
           "7AThkC_GXYx3nBye8"   // Votre Public Key
         );
 
-        console.log("✅ Réponse EmailJS:", response);
+        console.log(" Réponse EmailJS:", response);
 
         if (response.status === 200) {
           this.submitStatus = {
             type: "success",
-            message: "🎉 Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.",
+            message: " Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.",
           };
 
           // Réinitialiser le formulaire
@@ -353,7 +353,7 @@ export default {
           };
         }
       } catch (error) {
-        console.error("❌ Erreur EmailJS:", error);
+        console.error("Erreur EmailJS:", error);
         
         let errorMessage = "Erreur lors de l'envoi du message. Veuillez réessayer.";
         

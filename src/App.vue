@@ -60,27 +60,38 @@
           </a>
         </div>
 
-        <!-- Download CV Button -->
-        <a 
-          href="/path-to-cv.pdf" 
-          class="download-btn"
-          download
-        >
-          Télécharger CV
-        </a>
+        <!-- Boutons de droite -->
+        <div class="nav-right">
+          <!-- Download CV Button avec icône -->
+          <a 
+            href="/cv.pdf" 
+            class="download-btn"
+            :class="{ 'icon-only': isMobileOrTablet }"
+            :title="isMobileOrTablet ? 'Télécharger CV' : 'Télécharger mon CV'"
+            download="CV_Kelly_Alphador.pdf"
+            @click="downloadCV"
+          >
+            <svg v-if="isMobileOrTablet" class="download-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span v-else class="download-text">Télécharger CV</span>
+          </a>
 
-        <!-- Mobile Menu Toggle -->
-        <button 
-          class="mobile-toggle" 
-          @click="toggleMobileMenu"
-          aria-label="Toggle menu"
-        >
-          <div class="hamburger" :class="{ 'active': isMobileMenuOpen }">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </button>
+          <!-- Mobile Menu Toggle -->
+          <button 
+            class="mobile-toggle" 
+            @click="toggleMobileMenu"
+            aria-label="Toggle menu"
+          >
+            <div class="hamburger" :class="{ 'active': isMobileMenuOpen }">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
+        </div>
       </div>
     </nav>
 
@@ -209,7 +220,8 @@ export default {
       isMobileMenuOpen: false,
       activeSection: 'home',
       sections: ['home', 'about', 'skills', 'experience', 'projects', 'contact'],
-      showBackToTop: false
+      showBackToTop: false,
+      isMobileOrTablet: false
     };
   },
   computed: {
@@ -228,6 +240,7 @@ export default {
     this.setupScrollSpy();
     window.addEventListener('resize', this.handleResize);
     window.addEventListener('scroll', this.handleScroll);
+    this.checkDeviceType();
     this.handleResize();
     
     // Initialiser la classe active sur le premier lien
@@ -238,6 +251,9 @@ export default {
     window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
+    checkDeviceType() {
+      this.isMobileOrTablet = window.innerWidth <= 1024;
+    },
     createParticles() {
       const particlesContainer = this.$refs.particles;
       const particleCount = 50;
@@ -309,11 +325,17 @@ export default {
       this.activeSection = 'home';
       this.updateActiveLinks();
     },
+    downloadCV() {
+      // Optionnel: vous pouvez ajouter un tracking ou une confirmation ici
+      console.log('Téléchargement du CV...');
+      this.closeMobileMenu();
+    },
     handleScroll() {
       this.showBackToTop = window.scrollY > 500;
     },
     handleResize() {
-      if (window.innerWidth > 768) {
+      this.checkDeviceType();
+      if (window.innerWidth > 1024) {
         this.isMobileMenuOpen = false;
       }
     }
@@ -398,6 +420,7 @@ body {
 .logo {
   display: flex;
   align-items: center;
+  flex: 1;
 }
 
 .logo-text {
@@ -420,6 +443,8 @@ body {
   display: flex;
   gap: 40px;
   align-items: center;
+  justify-content: center;
+  flex: 2;
 }
 
 .nav-link {
@@ -460,6 +485,15 @@ body {
   width: 100%;
 }
 
+/* Conteneur pour les boutons de droite */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
 /* Download CV Button */
 .download-btn {
   padding: 12px 28px;
@@ -476,11 +510,33 @@ body {
   align-items: center;
   justify-content: center;
   white-space: nowrap;
+  min-width: 160px;
 }
 
 .download-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(80, 200, 120, 0.3);
+  background: linear-gradient(135deg, #2eb85c, #267d46);
+}
+
+/* Version icône seulement */
+.download-btn.icon-only {
+  padding: 10px;
+  min-width: auto;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 0;
+}
+
+.download-icon {
+  width: 24px;
+  height: 24px;
+  stroke: var(--bg-dark);
+}
+
+.download-text {
+  display: inline-block;
 }
 
 /* Mobile Toggle */
@@ -829,7 +885,7 @@ body {
   }
 }
 
-/* Responsive */
+/* Responsive Design pour tablette (1024px) et mobile */
 @media (max-width: 1200px) {
   .social-sidebar {
     left: 20px;
@@ -837,6 +893,122 @@ body {
   
   .nav-links {
     gap: 30px;
+  }
+  
+  .download-btn:not(.icon-only) {
+    padding: 10px 20px;
+    min-width: 140px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Pour tablette */
+  body {
+    padding-top: 75px;
+  }
+  
+  .nav-container {
+    height: 75px;
+  }
+  
+  .logo-text {
+    font-size: 1.8rem;
+  }
+  
+  .nav-links {
+    gap: 0;
+    position: fixed;
+    top: 75px;
+    left: 0;
+    width: 100%;
+    background: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    padding: 20px 0;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(80, 200, 120, 0.1);
+  }
+  
+  .nav-links.mobile-open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .nav-link {
+    width: 100%;
+    text-align: center;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+  }
+  
+  .nav-link::after {
+    display: none;
+  }
+  
+  /* Active state pour mobile/tablette */
+  .nav-link.active {
+    background: rgba(80, 200, 120, 0.1);
+  }
+  
+  .mobile-toggle {
+    display: block;
+    order: 3; /* Met le hamburger tout à droite */
+  }
+  
+  .active-indicator {
+    display: block;
+  }
+  
+  /* Le bouton télécharger devient une icône */
+  .download-btn {
+    min-width: auto;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    border-radius: 50%;
+    order: 2; /* Met l'icône télécharger avant le hamburger */
+  }
+  
+  .download-text {
+    display: none;
+  }
+  
+  .download-icon {
+    display: block;
+  }
+  
+  .nav-right {
+    gap: 15px;
+  }
+  
+  .social-sidebar {
+    left: 15px;
+  }
+  
+  .social-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .social-icon .icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .tooltip {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+  
+  .blur-bg-home {
+    width: 350px;
+    height: 350px;
+    filter: blur(45px);
   }
 }
 
@@ -861,10 +1033,6 @@ body {
     width: 300px;
     height: 300px;
     filter: blur(40px);
-  }
-  
-  .nav-links {
-    gap: 20px;
   }
 }
 
@@ -932,13 +1100,6 @@ body {
     background: rgba(80, 200, 120, 0.1);
   }
 
-  .download-btn {
-    position: absolute;
-    right: 60px;
-    padding: 10px 20px;
-    font-size: 0.9rem;
-  }
-
   .social-sidebar {
     display: none;
   }
@@ -997,10 +1158,19 @@ body {
     font-size: 1.5rem;
   }
   
+  .nav-right {
+    gap: 10px;
+  }
+  
   .download-btn {
-    right: 50px;
-    padding: 8px 16px;
-    font-size: 0.8rem;
+    width: 45px;
+    height: 45px;
+    padding: 8px;
+  }
+  
+  .download-icon {
+    width: 20px;
+    height: 20px;
   }
 
   .blur-bg-home {
