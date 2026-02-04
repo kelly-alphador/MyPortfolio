@@ -7,6 +7,13 @@
         <span ref="typedElement"></span>
         <span class="typed-cursor">|</span>
       </div>
+      
+      <!-- Indication de disponibilité -->
+      <div class="availability-badge">
+        <span class="availability-dot"></span>
+        <span class="availability-text">Disponible pour des nouvelles opportunités</span>
+      </div>
+      
       <!-- Image avec animation de flottement -->
       <div class="hero-avatar">
         <div class="avatar-container">
@@ -163,7 +170,56 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+/* Indication de disponibilité */
+.availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(80, 200, 120, 0.1);
+  border: 1px solid rgba(80, 200, 120, 0.3);
+  border-radius: 50px;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 1s forwards;
   margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.availability-badge:hover {
+  background: rgba(80, 200, 120, 0.15);
+  border-color: rgba(80, 200, 120, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(80, 200, 120, 0.2);
+}
+
+.availability-dot {
+  width: 8px;
+  height: 8px;
+  background: #50c878;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(80, 200, 120, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(80, 200, 120, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(80, 200, 120, 0);
+  }
+}
+
+.availability-text {
+  font-size: 0.9rem;
+  color: #50c878;
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
 /* Style pour l'avatar avec animation de flottement */
@@ -267,18 +323,6 @@ export default {
   animation-delay: 2s;
 }
 
-/* Animation de pulsation pour les cercles */
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.4;
-  }
-}
-
 /* Curseur personnalisé pour l'animation de typing */
 .typed-cursor {
   font-weight: 100;
@@ -333,6 +377,14 @@ export default {
   .hero-role {
     font-size: clamp(1.2rem, 3vw, 2rem);
   }
+  
+  .availability-badge {
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .availability-text {
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -356,6 +408,15 @@ export default {
 
   .hero-role {
     font-size: clamp(1rem, 2.5vw, 1.5rem);
+  }
+  
+  .availability-badge {
+    padding: 0.3rem 0.7rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .availability-text {
+    font-size: 0.75rem;
   }
   
   /* Ajustement de l'animation sur mobile */
@@ -392,6 +453,15 @@ export default {
 
   .hero-role {
     font-size: clamp(0.9rem, 2vw, 1.2rem);
+  }
+  
+  .availability-badge {
+    padding: 0.25rem 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .availability-text {
+    font-size: 0.7rem;
   }
 }
 </style>

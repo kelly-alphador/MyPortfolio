@@ -2,7 +2,7 @@
   <section class="experience" id="experience">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">Expérience</h2>
+        <h2 class="section-title">Expériences</h2>
       </div>
       
       <div class="experience-grid">

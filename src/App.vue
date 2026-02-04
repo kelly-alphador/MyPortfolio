@@ -40,7 +40,7 @@
             :class="{ 'active': activeSection === 'experience' }"
             @click.prevent="scrollToSection('experience')"
           >
-            Expérience
+            Expériences
           </a>
           <a 
             href="#projects" 

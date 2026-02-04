@@ -84,8 +84,8 @@ L'application permet désormais aux clients d'acheter des produits en ligne faci
 ,
     image: shopMasterImg,
     imageAlt: "Capture d'écran ShopMaster",
-    demoLink: "#",
-    githubLink: "#",
+    demoLink: "https://www.linkedin.com/feed/update/urn:li:activity:7373372640092315648/",
+    githubLink: "https://github.com/kelly-alphador/ShopMaster",
     technologies: ["ASP.NET Core MVC", "C#", "JavaScript", "Bootstrap", "SQL Server"]
   },
   {
@@ -102,7 +102,7 @@ ChronoDev améliore la transparence, facilite le suivi de la productivité et ai
     image: chronoDevImg,
     imageAlt: "Capture d'écran ChronoDev",
     demoLink: "#",
-    githubLink: "#",
+    githubLink: "https://github.com/kelly-alphador/ChronoDev.Api",
     technologies: ["Vue.js", "Nuxt.js", ".NET Core Web API", "SQL Server"]
   },
   {
@@ -116,7 +116,7 @@ Grâce à une interface responsive, des animations modernes et un design soigné
     image: portfolioImg,
     imageAlt: "Capture d'écran Portfolio",
     demoLink: "#",
-    githubLink: "#",
+    githubLink: "https://github.com/kelly-alphador/MyPortfolio",
     technologies: ["Vue.js", "JavaScript", "CSS3"]
   },
   {
