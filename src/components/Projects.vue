@@ -44,21 +44,32 @@
           </div>
 
           <div class="project-content">
-            <!-- Description tronquée par défaut -->
+            <!-- Description avec animation fluide -->
             <div class="description-container">
-              <p 
-                class="project-description"
-                :class="{ 'truncated': !project.isExpanded }"
-                ref="descriptionElement"
+              <div 
+                class="description-wrapper"
+                :class="{ 'expanded': project.isExpanded }"
               >
-                {{ project.description }}
-              </p>
+                <p 
+                  class="project-description"
+                  ref="descriptionElements"
+                >
+                  {{ project.description }}
+                </p>
+              </div>
               
-              <!-- Bouton pour voir plus/moins -->
+              <!-- Gradient fade pour l'effet de transition -->
+              <div 
+                class="description-fade"
+                v-if="!project.isExpanded"
+              ></div>
+              
+              <!-- Bouton pour voir plus/moins avec animation -->
               <button 
                 class="toggle-description-btn"
                 @click="toggleDescription(index)"
                 :aria-expanded="project.isExpanded"
+                :class="{ 'expanded': project.isExpanded }"
               >
                 <span class="btn-text">
                   {{ project.isExpanded ? 'Voir moins' : 'Voir la description' }}
@@ -68,7 +79,6 @@
                   viewBox="0 0 24 24" 
                   fill="none" 
                   stroke="currentColor"
-                  :class="{ 'expanded': project.isExpanded }"
                 >
                   <path 
                     stroke-linecap="round" 
@@ -133,7 +143,7 @@ Chaque utilisateur peut suivre l'état de ses déclarations : les heures validé
 ChronoDev améliore la transparence, facilite le suivi de la productivité et aide les entreprises à mieux contrôler l'avancement réel de leurs projets.`,
           image: chronoDevImg,
           imageAlt: "Capture d'écran ChronoDev",
-          demoLink: "https://www.linkedin.com/feed/update/urn:li:activity:7425052358512062465/?originTrackingId=iwJPR6ZgSXHCTVSXmtKpng%3D%3D",
+          demoLink: "#",
           githubLink: "https://github.com/kelly-alphador/ChronoDev.Api",
           technologies: ["Vue.js", "Nuxt.js", ".NET Core Web API", "SQL Server"],
           isExpanded: false
@@ -207,7 +217,17 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l'al
     },
     
     toggleDescription(index) {
-      this.projects[index].isExpanded = !this.projects[index].isExpanded;
+      const project = this.projects[index];
+      project.isExpanded = !project.isExpanded;
+      
+      // Animation fluide de la carte
+      const card = document.querySelectorAll('.project-card')[index];
+      if (card) {
+        card.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+        setTimeout(() => {
+          card.style.transition = '';
+        }, 400);
+      }
     }
   },
 };
@@ -271,7 +291,7 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l'al
 .project-card {
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.4s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid rgba(80, 200, 120, 0.1);
   border-radius: 16px;
   padding: 0;
@@ -280,6 +300,7 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l'al
   backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
+  will-change: transform;
 }
 
 .project-card.animated {
@@ -309,7 +330,7 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l'al
   object-fit: cover;
   object-position: center top;
   background: rgba(30, 40, 35, 0.5);
-  transition: transform 0.5s ease;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Pour les images de placeholder */
@@ -337,7 +358,7 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l'al
   justify-content: center;
   gap: 1.5rem;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2;
 }
 
@@ -353,7 +374,7 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l'al
   border-radius: 8px;
   font-weight: 500;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-size: 0.9rem;
 }
 
@@ -425,29 +446,55 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l'al
   flex-grow: 1;
   margin-bottom: 1rem;
   position: relative;
+  overflow: hidden;
+}
+
+.description-wrapper {
+  position: relative;
+  max-height: 120px; /* Hauteur pour 4 lignes */
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.description-wrapper.expanded {
+  max-height: 800px; /* Hauteur suffisante pour tout afficher */
 }
 
 .project-description {
   color: var(--text-secondary);
   line-height: 1.6;
   font-size: 0.95rem;
-  transition: all 0.3s ease;
-  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
-/* État tronqué */
-.project-description.truncated {
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-height: calc(4 * 1.6 * 0.95rem); /* 4 lignes * line-height * font-size */
+/* Gradient fade pour l'effet de transition */
+.description-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(20, 30, 25, 0.7) 30%,
+    rgba(20, 30, 25, 0.9) 60%,
+    rgba(20, 30, 25, 1) 90%
+  );
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
-/* Bouton pour voir plus/moins */
+.description-wrapper.expanded + .description-fade {
+  opacity: 0;
+}
+
+/* Bouton pour voir plus/moins avec animation */
 .toggle-description-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   background: transparent;
@@ -458,29 +505,59 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l'al
   font-weight: 500;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin-top: 1rem;
   align-self: flex-start;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.toggle-description-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(80, 200, 120, 0.1), transparent);
+  transition: left 0.6s ease;
+  z-index: -1;
 }
 
 .toggle-description-btn:hover {
   background: rgba(80, 200, 120, 0.1);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(80, 200, 120, 0.2);
+}
+
+.toggle-description-btn:hover::before {
+  left: 100%;
+}
+
+.toggle-description-btn.expanded {
+  background: rgba(80, 200, 120, 0.15);
+  border-color: var(--emerald-dark);
 }
 
 .toggle-icon {
   width: 16px;
   height: 16px;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   stroke-width: 2.5;
 }
 
-.toggle-icon.expanded {
+.toggle-description-btn.expanded .toggle-icon {
   transform: rotate(180deg);
 }
 
 .btn-text {
   font-weight: 500;
+  transition: transform 0.3s ease;
+}
+
+.toggle-description-btn:hover .btn-text {
+  transform: translateX(2px);
 }
 
 /* Technologies */
@@ -489,6 +566,8 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l'al
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(80, 200, 120, 0.1);
 }
 
 .tech-badge {
@@ -499,7 +578,7 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l'al
   font-size: 0.8rem;
   font-weight: 500;
   border: 1px solid rgba(80, 200, 120, 0.2);
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   height: 28px;
   display: inline-flex;
   align-items: center;
@@ -510,7 +589,7 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l'al
 .tech-badge:hover {
   background: rgba(80, 200, 120, 0.15);
   border-color: rgba(80, 200, 120, 0.3);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 /* Suppression des statistiques */
@@ -520,25 +599,42 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l'al
 
 /* Animations décalées */
 .project-card:nth-child(1).animated {
-  animation: fadeInUp 0.6s ease 0.1s forwards;
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
 }
 
 .project-card:nth-child(2).animated {
-  animation: fadeInUp 0.6s ease 0.2s forwards;
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
 }
 
 .project-card:nth-child(3).animated {
-  animation: fadeInUp 0.6s ease 0.3s forwards;
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Animation subtile de la carte lors du toggle */
+.project-card.toggle-animating {
+  animation: cardPulse 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes cardPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.01);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
@@ -547,6 +643,14 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l'al
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
     max-width: 800px;
+  }
+  
+  .description-wrapper {
+    max-height: 110px;
+  }
+  
+  .description-wrapper.expanded {
+    max-height: 1000px;
   }
 }
 
@@ -607,10 +711,17 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l'al
   .project-description {
     font-size: 0.9rem;
   }
-
-  .project-description.truncated {
-    -webkit-line-clamp: 3;
-    max-height: calc(3 * 1.6 * 0.9rem);
+  
+  .description-wrapper {
+    max-height: 100px; /* 3 lignes sur mobile */
+  }
+  
+  .description-wrapper.expanded {
+    max-height: 1200px;
+  }
+  
+  .description-fade {
+    height: 50px;
   }
 
   .toggle-description-btn {
@@ -658,9 +769,21 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l'al
     align-self: flex-start;
   }
 
-  .project-description.truncated {
-    -webkit-line-clamp: 2;
-    max-height: calc(2 * 1.6 * 0.9rem);
+  .description-wrapper {
+    max-height: 80px; /* 2 lignes sur très petits écrans */
+  }
+  
+  .description-wrapper.expanded {
+    max-height: 1500px;
+  }
+  
+  .description-fade {
+    height: 40px;
+  }
+  
+  .toggle-description-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 </style>
