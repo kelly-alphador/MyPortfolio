@@ -44,9 +44,41 @@
           </div>
 
           <div class="project-content">
-            <p class="project-description">
-              {{ project.description }}
-            </p>
+            <!-- Description tronquée par défaut -->
+            <div class="description-container">
+              <p 
+                class="project-description"
+                :class="{ 'truncated': !project.isExpanded }"
+                ref="descriptionElement"
+              >
+                {{ project.description }}
+              </p>
+              
+              <!-- Bouton pour voir plus/moins -->
+              <button 
+                class="toggle-description-btn"
+                @click="toggleDescription(index)"
+                :aria-expanded="project.isExpanded"
+              >
+                <span class="btn-text">
+                  {{ project.isExpanded ? 'Voir moins' : 'Voir la description' }}
+                </span>
+                <svg 
+                  class="toggle-icon" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor"
+                  :class="{ 'expanded': project.isExpanded }"
+                >
+                  <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    stroke-width="2" 
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+            </div>
 
             <div class="project-tech">
               <span 
@@ -70,81 +102,84 @@ import chronoDevImg from '@/assets/images/image_app/chronodev.png'
 import portfolioImg from '@/assets/images/image_app/portfolio.png'
 import dantzigImg from '@/assets/images/image_app/DANDZIG.png'
 import taskManagerImg from '@/assets/images/image_app/Gestion_tacche.png'
+
 export default {
   name: "Projects",
   data() {
     return {
-        projects: [
-  {
-    title: "ShopMaster",
-    category: "Application Web E-commerce",
-    description: `ShopMaster est une application e-commerce conçue pour répondre aux difficultés rencontrées par les commerces traditionnels. Avant sa mise en place, les clients devaient se déplacer pour effectuer leurs achats, ce qui entraînait une perte de temps. De plus, la gestion des ventes se faisait manuellement via Excel, rendant le suivi du stock peu fiable. Les ruptures de stock n'étaient pas toujours détectées à temps, ce qui provoquait des frustrations lorsque les clients cherchaient des produits indisponibles.
+      projects: [
+        {
+          title: "ShopMaster",
+          category: "Application Web E-commerce",
+          description: `ShopMaster est une application e-commerce conçue pour répondre aux difficultés rencontrées par les commerces traditionnels. Avant sa mise en place, les clients devaient se déplacer pour effectuer leurs achats, ce qui entraînait une perte de temps. De plus, la gestion des ventes se faisait manuellement via Excel, rendant le suivi du stock peu fiable. Les ruptures de stock n'étaient pas toujours détectées à temps, ce qui provoquait des frustrations lorsque les clients cherchaient des produits indisponibles.
 
-L'application permet désormais aux clients d'acheter des produits en ligne facilement, tandis que les administrateurs disposent d'un système centralisé pour gérer les produits, les ventes, les commandes et le stock en temps réel. ShopMaster inclut un paiement sécurisé via PayPal, la création de comptes clients, une confirmation par email après achat et l'envoi automatique de factures. Cette solution améliore l'expérience client, réduit les pertes liées aux erreurs de gestion et optimise le suivi des ventes.`
-,
-    image: shopMasterImg,
-    imageAlt: "Capture d'écran ShopMaster",
-    demoLink: "https://www.linkedin.com/feed/update/urn:li:activity:7373372640092315648/",
-    githubLink: "https://github.com/kelly-alphador/ShopMaster",
-    technologies: ["ASP.NET Core MVC", "C#", "JavaScript", "Bootstrap", "SQL Server"]
-  },
-  {
-    title: "ChronoDev",
-    category: "Application Web de Gestion de Projets",
-    description: `ChronoDev est une application de gestion des feuilles de temps conçue pour les entreprises informatiques. Avant sa mise en place, le suivi des heures de travail se faisait de manière informelle ou via des fichiers Excel, ce qui rendait difficile le contrôle du temps réellement passé sur chaque projet. Les managers manquaient de visibilité sur la productivité des équipes, et les développeurs n’avaient pas toujours de retour clair sur la validation de leurs heures.
+L'application permet désormais aux clients d'acheter des produits en ligne facilement, tandis que les administrateurs disposent d'un système centralisé pour gérer les produits, les ventes, les commandes et le stock en temps réel. ShopMaster inclut un paiement sécurisé via PayPal, la création de comptes clients, une confirmation par email après achat et l'envoi automatique de factures. Cette solution améliore l'expérience client, réduit les pertes liées aux erreurs de gestion et optimise le suivi des ventes.`,
+          image: shopMasterImg,
+          imageAlt: "Capture d'écran ShopMaster",
+          demoLink: "https://www.linkedin.com/feed/update/urn:li:activity:7373372640092315648/",
+          githubLink: "https://github.com/kelly-alphador/ShopMaster",
+          technologies: ["ASP.NET Core MVC", "C#", "JavaScript", "Bootstrap", "SQL Server"],
+          isExpanded: false
+        },
+        {
+          title: "ChronoDev",
+          category: "Application Web de Gestion de Projets",
+          description: `ChronoDev est une application de gestion des feuilles de temps conçue pour les entreprises informatiques. Avant sa mise en place, le suivi des heures de travail se faisait de manière informelle ou via des fichiers Excel, ce qui rendait difficile le contrôle du temps réellement passé sur chaque projet. Les managers manquaient de visibilité sur la productivité des équipes, et les développeurs n'avaient pas toujours de retour clair sur la validation de leurs heures.
 
-L’application introduit un système structuré avec trois rôles : Manager, Chef de projet et Développeur. Les développeurs et chefs de projet saisissent leurs heures de travail par projet et par jour. Le manager peut consulter ces saisies, puis les valider ou les refuser avec un commentaire expliquant la raison du refus.
+L'application introduit un système structuré avec trois rôles : Manager, Chef de projet et Développeur. Les développeurs et chefs de projet saisissent leurs heures de travail par projet et par jour. Le manager peut consulter ces saisies, puis les valider ou les refuser avec un commentaire expliquant la raison du refus.
 
-Chaque utilisateur peut suivre l’état de ses déclarations : les heures validées apparaissent en vert, celles refusées en rouge, avec accès au détail du motif de refus. L’application permet également de visualiser le temps restant alloué à un projet, offrant ainsi une meilleure anticipation des délais et une gestion plus efficace des ressources.
+Chaque utilisateur peut suivre l'état de ses déclarations : les heures validées apparaissent en vert, celles refusées en rouge, avec accès au détail du motif de refus. L'application permet également de visualiser le temps restant alloué à un projet, offrant ainsi une meilleure anticipation des délais et une gestion plus efficace des ressources.
 
-ChronoDev améliore la transparence, facilite le suivi de la productivité et aide les entreprises à mieux contrôler l’avancement réel de leurs projets.`,
-  
-    image: chronoDevImg,
-    imageAlt: "Capture d'écran ChronoDev",
-    demoLink: "#",
-    githubLink: "https://github.com/kelly-alphador/ChronoDev.Api",
-    technologies: ["Vue.js", "Nuxt.js", ".NET Core Web API", "SQL Server"]
-  },
-  {
-    title: "Portfolio Interactif",
-    category: "Portfolio Web",
-     description: `Ce portfolio interactif a été conçu pour répondre à un besoin essentiel : présenter clairement mes compétences et mes projets dans un format professionnel, moderne et accessible à tous. Avant sa création, mes réalisations étaient dispersées entre différents supports, ce qui rendait difficile pour un recruteur ou un client d’avoir une vision globale de mon profil et de mon savoir-faire.
+ChronoDev améliore la transparence, facilite le suivi de la productivité et aide les entreprises à mieux contrôler l'avancement réel de leurs projets.`,
+          image: chronoDevImg,
+          imageAlt: "Capture d'écran ChronoDev",
+          demoLink: "https://www.linkedin.com/feed/update/urn:li:activity:7425052358512062465/?originTrackingId=iwJPR6ZgSXHCTVSXmtKpng%3D%3D",
+          githubLink: "https://github.com/kelly-alphador/ChronoDev.Api",
+          technologies: ["Vue.js", "Nuxt.js", ".NET Core Web API", "SQL Server"],
+          isExpanded: false
+        },
+        {
+          title: "Portfolio Interactif",
+          category: "Portfolio Web",
+          description: `Ce portfolio interactif a été conçu pour répondre à un besoin essentiel : présenter clairement mes compétences et mes projets dans un format professionnel, moderne et accessible à tous. Avant sa création, mes réalisations étaient dispersées entre différents supports, ce qui rendait difficile pour un recruteur ou un client d'avoir une vision globale de mon profil et de mon savoir-faire.
 
-L’objectif de cette plateforme est de centraliser mes projets, démontrer mes compétences techniques à travers des cas concrets et offrir une navigation fluide et agréable. Le site met en avant des projets réels, chacun présenté avec le problème rencontré, la solution développée et les technologies utilisées.
+L'objectif de cette plateforme est de centraliser mes projets, démontrer mes compétences techniques à travers des cas concrets et offrir une navigation fluide et agréable. Le site met en avant des projets réels, chacun présenté avec le problème rencontré, la solution développée et les technologies utilisées.
 
-Grâce à une interface responsive, des animations modernes et un design soigné, ce portfolio reflète à la fois mes compétences en développement front-end et mon attention à l’expérience utilisateur. Il constitue un outil professionnel qui facilite la mise en relation avec des recruteurs, des entreprises et des clients potentiels.`,
-    image: portfolioImg,
-    imageAlt: "Capture d'écran Portfolio",
-    demoLink: "#",
-    githubLink: "https://github.com/kelly-alphador/MyPortfolio",
-    technologies: ["Vue.js", "JavaScript", "CSS3"]
-  },
-  {
-    title: "Algorithme de Dantzig",
-    category: "Application Desktop",
-    description: `Cette application desktop a été développée pour faciliter l’apprentissage des algorithmes de graphes, notamment l’algorithme de Dantzig utilisé pour déterminer les chemins minimaux et maximaux. Avant sa mise en place, les étudiants devaient effectuer ces calculs manuellement, ce qui demandait beaucoup de temps et augmentait le risque d’erreurs, surtout pour les graphes complexes.
+Grâce à une interface responsive, des animations modernes et un design soigné, ce portfolio reflète à la fois mes compétences en développement front-end et mon attention à l'expérience utilisateur. Il constitue un outil professionnel qui facilite la mise en relation avec des recruteurs, des entreprises et des clients potentiels.`,
+          image: portfolioImg,
+          imageAlt: "Capture d'écran Portfolio",
+          demoLink: "#",
+          githubLink: "https://github.com/kelly-alphador/MyPortfolio",
+          technologies: ["Vue.js", "JavaScript", "CSS3"],
+          isExpanded: false
+        },
+        {
+          title: "Algorithme de Dantzig",
+          category: "Application Desktop",
+          description: `Cette application desktop a été développée pour faciliter l'apprentissage des algorithmes de graphes, notamment l'algorithme de Dantzig utilisé pour déterminer les chemins minimaux et maximaux. Avant sa mise en place, les étudiants devaient effectuer ces calculs manuellement, ce qui demandait beaucoup de temps et augmentait le risque d'erreurs, surtout pour les graphes complexes.
 
-L’application permet de modéliser un graphe à travers une interface graphique intuitive, avec visualisation des sommets et des arcs. L’utilisateur peut ensuite lancer automatiquement le calcul des chemins minimaux et maximaux, obtenant des résultats rapides et fiables.
+L'application permet de modéliser un graphe à travers une interface graphique intuitive, avec visualisation des sommets et des arcs. L'utilisateur peut ensuite lancer automatiquement le calcul des chemins minimaux et maximaux, obtenant des résultats rapides et fiables.
 
-Cette solution aide les étudiants à mieux comprendre le fonctionnement de l’algorithme grâce à la visualisation, tout en réduisant le temps consacré aux calculs manuels. Elle constitue ainsi un outil pédagogique interactif qui rend l’apprentissage plus efficace et plus clair.`,
-    image: dantzigImg,
-    imageAlt: "Capture d'écran Algorithme de Dantzig",
-    demoLink: "#",
-    githubLink: "#",
-    technologies: ["C#", "WPF", ".NET"]
-  },
-  {
-    title: "Gestion de Tâches",
-    category: "Application Desktop",
-    description: "Application de gestion de tâches permettant d’ajouter, modifier, supprimer et suivre l’état des tâches. Interface simple et efficace pour améliorer l’organisation du travail.",
-    image: taskManagerImg,
-    imageAlt: "Capture d'écran Gestion de Tâches",
-    demoLink: "#",
-    githubLink: "#",
-    technologies: ["C#", "Windows Forms", ".NET"]
-  }
-]
-
+Cette solution aide les étudiants à mieux comprendre le fonctionnement de l'algorithme grâce à la visualisation, tout en réduisant le temps consacré aux calculs manuels. Elle constitue ainsi un outil pédagogique interactif qui rend l'apprentissage plus efficace et plus clair.`,
+          image: dantzigImg,
+          imageAlt: "Capture d'écran Algorithme de Dantzig",
+          demoLink: "#",
+          githubLink: "#",
+          technologies: ["C#", "WPF", ".NET"],
+          isExpanded: false
+        },
+        {
+          title: "Gestion de Tâches",
+          category: "Application Desktop",
+          description: "Application de gestion de tâches permettant d'ajouter, modifier, supprimer et suivre l'état des tâches. Interface simple et efficace pour améliorer l'organisation du travail.",
+          image: taskManagerImg,
+          imageAlt: "Capture d'écran Gestion de Tâches",
+          demoLink: "#",
+          githubLink: "#",
+          technologies: ["C#", "Windows Forms", ".NET"],
+          isExpanded: false
+        }
+      ]
     };
   },
   mounted() {
@@ -170,6 +205,10 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l’
         observer.observe(card);
       });
     },
+    
+    toggleDescription(index) {
+      this.projects[index].isExpanded = !this.projects[index].isExpanded;
+    }
   },
 };
 </script>
@@ -239,6 +278,8 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l’
   overflow: hidden;
   background: rgba(20, 30, 25, 0.3);
   backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card.animated {
@@ -259,6 +300,7 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l’
   overflow: hidden;
   border-bottom: 1px solid rgba(80, 200, 120, 0.1);
   background: linear-gradient(135deg, #15231c 0%, #1e3429 100%);
+  flex-shrink: 0;
 }
 
 .project-img {
@@ -350,6 +392,7 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l’
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  flex-shrink: 0;
 }
 
 .project-title {
@@ -372,13 +415,72 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l’
 
 .project-content {
   padding: 0 1.5rem 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container de description */
+.description-container {
+  flex-grow: 1;
+  margin-bottom: 1rem;
+  position: relative;
 }
 
 .project-description {
   color: var(--text-secondary);
   line-height: 1.6;
-  margin-bottom: 1.5rem;
   font-size: 0.95rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+/* État tronqué */
+.project-description.truncated {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: calc(4 * 1.6 * 0.95rem); /* 4 lignes * line-height * font-size */
+}
+
+/* Bouton pour voir plus/moins */
+.toggle-description-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 2px solid var(--emerald-primary);
+  color: var(--emerald-primary);
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  align-self: flex-start;
+}
+
+.toggle-description-btn:hover {
+  background: rgba(80, 200, 120, 0.1);
+  transform: translateY(-2px);
+}
+
+.toggle-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+  stroke-width: 2.5;
+}
+
+.toggle-icon.expanded {
+  transform: rotate(180deg);
+}
+
+.btn-text {
+  font-weight: 500;
 }
 
 /* Technologies */
@@ -386,7 +488,7 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l’
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  margin-top: auto;
 }
 
 .tech-badge {
@@ -506,6 +608,16 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l’
     font-size: 0.9rem;
   }
 
+  .project-description.truncated {
+    -webkit-line-clamp: 3;
+    max-height: calc(3 * 1.6 * 0.9rem);
+  }
+
+  .toggle-description-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
   .tech-badge {
     font-size: 0.75rem;
     padding: 0.25rem 0.6rem;
@@ -544,6 +656,11 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l’
 
   .project-category {
     align-self: flex-start;
+  }
+
+  .project-description.truncated {
+    -webkit-line-clamp: 2;
+    max-height: calc(2 * 1.6 * 0.9rem);
   }
 }
 </style>
