@@ -1,69 +1,72 @@
 <template>
   <div id="app">
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <!-- Logo AKA -->
-        <div class="logo">
-          <span class="logo-text">AKA</span>
+    <!-- Loading Screen avec effet splash -->
+    <div v-if="isLoading" class="loading-screen" :class="{ 'fade-out': isFadeOut }">
+      <!-- Background rempli avec gradient -->
+      <div class="splash-background">
+        <div class="gradient-sphere"></div>
+        <div class="gradient-sphere-2"></div>
+        <div class="gradient-overlay"></div>
+      </div>
+      
+      <!-- Lettres qui tombent -->
+      <div class="letters-container">
+        <div 
+          v-for="(letter, index) in loadingLetters" 
+          :key="index"
+          class="loading-letter"
+          :class="[`letter-${index}`, { 'falling': isFalling[index] }]"
+          :style="getLetterStyle(index)"
+        >
+          {{ letter }}
         </div>
-
-        <!-- Navigation Links -->
-        <div class="nav-links" :class="{ 'mobile-open': isMobileMenuOpen }">
-          <a 
-            href="#home" 
-            class="nav-link" 
-            :class="{ 'active': activeSection === 'home' }"
-            @click.prevent="scrollToSection('home')"
-          >
-            Accueil
-          </a>
-          <a 
-            href="#about" 
-            class="nav-link" 
-            :class="{ 'active': activeSection === 'about' }"
-            @click.prevent="scrollToSection('about')"
-          >
-            À propos
-          </a>
-          <a 
-            href="#skills" 
-            class="nav-link" 
-            :class="{ 'active': activeSection === 'skills' }"
-            @click.prevent="scrollToSection('skills')"
-          >
-            Compétences
-          </a>
-          <a 
-            href="#experience" 
-            class="nav-link" 
-            :class="{ 'active': activeSection === 'experience' }"
-            @click.prevent="scrollToSection('experience')"
-          >
-            Expériences
-          </a>
-          <a 
-            href="#projects" 
-            class="nav-link" 
-            :class="{ 'active': activeSection === 'projects' }"
-            @click.prevent="scrollToSection('projects')"
-          >
-            Projets
-          </a>
-          <a 
-            href="#contact" 
-            class="nav-link" 
-            :class="{ 'active': activeSection === 'contact' }"
-            @click.prevent="scrollToSection('contact')"
-          >
-            Contact
-          </a>
+      </div>
+      
+      <!-- Barre de progression avec effet de glow -->
+      <div class="loading-progress-container">
+        <div class="loading-progress" :style="{ width: loadingProgress + '%' }">
+          <div class="progress-glow"></div>
         </div>
+      </div>
+      
+      <!-- Texte de chargement -->
+      <div class="loading-text" :class="{ 'visible': loadingProgress > 0 }">
+        <span v-if="loadingProgress < 33">Préparation...</span>
+        <span v-else-if="loadingProgress < 66">Chargement...</span>
+        <span v-else-if="loadingProgress < 100">Presque prêt...</span>
+        <span v-else>Bienvenue !</span>
+      </div>
+    </div>
 
-        <!-- Boutons de droite -->
-        <div class="nav-right">
-          <!-- Download CV Button avec icône -->
-          <a 
+    <!-- Main App Content (visible après chargement) -->
+    <template v-else>
+      <!-- Navigation Bar avec animation -->
+      <nav class="navbar" :class="{ 'animate-in': !isLoading }">
+        <div class="nav-container">
+          <!-- Logo AKA avec animation -->
+          <div class="logo animate-item" style="animation-delay: 0.1s">
+            <span class="logo-text">AKA</span>
+          </div>
+
+          <!-- Navigation Links avec animations -->
+          <div class="nav-links" :class="{ 'mobile-open': isMobileMenuOpen }">
+            <a 
+              v-for="(item, index) in navItems"
+              :key="item.id"
+              :href="`#${item.id}`" 
+              class="nav-link animate-item" 
+              :class="{ 'active': activeSection === item.id }"
+              :style="{ animationDelay: `${0.2 + index * 0.1}s` }"
+              @click.prevent="scrollToSection(item.id)"
+            >
+              {{ item.label }}
+            </a>
+          </div>
+
+          <!-- Boutons de droite avec animations -->
+          <div class="nav-right">
+            <!-- Download CV Button avec texte ou icône selon appareil -->
+                  <a 
             href="/cv.pdf" 
             class="download-btn"
             :class="{ 'icon-only': isMobileOrTablet }"
@@ -79,116 +82,102 @@
             <span v-else class="download-text">Télécharger CV</span>
           </a>
 
-          <!-- Mobile Menu Toggle -->
-          <button 
-            class="mobile-toggle" 
-            @click="toggleMobileMenu"
-            aria-label="Toggle menu"
+            <!-- Mobile Menu Toggle avec animation -->
+            <button 
+              class="mobile-toggle animate-item" 
+              :style="{ animationDelay: '0.9s' }"
+              @click="toggleMobileMenu"
+              aria-label="Toggle menu"
+            >
+              <div class="hamburger" :class="{ 'active': isMobileMenuOpen }">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Active Link Indicator (mobile) -->
+      <div 
+        class="active-indicator" 
+        :style="activeIndicatorStyle"
+      ></div>
+
+      <!-- Social Media Sidebar avec animations -->
+      <div class="social-sidebar animate-sidebar">
+        <div class="social-line animate-line" style="animation-delay: 1s"></div>
+        <div class="social-icons">
+          <a 
+            v-for="(social, index) in socialLinks"
+            :key="social.id"
+            :href="social.href"
+            :target="social.target"
+            class="social-icon animate-icon"
+            :class="[social.id, { 'tooltip-active': false }]"
+            :style="{ animationDelay: `${1.1 + index * 0.15}s` }"
+            :aria-label="social.label"
           >
-            <div class="hamburger" :class="{ 'active': isMobileMenuOpen }">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </button>
+            <component :is="social.icon" class="icon" />
+            <span class="tooltip">{{ social.tooltip }}</span>
+          </a>
         </div>
       </div>
-    </nav>
 
-    <!-- Active Link Indicator (mobile) -->
-    <div 
-      class="active-indicator" 
-      :style="activeIndicatorStyle"
-    ></div>
+      <!-- Main Content Container avec animations -->
+      <div class="main-content animate-content" style="animation-delay: 1.2s">
+        <div id="home" class="section-container">
+          <!-- Blur Background for Home - seulement dans cette section -->
+          <div class="blur-bg-home animate-blur"></div>
+          <Home />
+        </div>
+        <div id="about">
+          <About />
+        </div>
+        <div id="skills">
+          <Skills />
+        </div>
+        <div id="experience">
+          <Experience />
+        </div>
+        <div id="projects">
+          <Projects />
+        </div>
+        <div id="contact">
+          <Contact />
+        </div>
+      </div>
 
-    <!-- Social Media Sidebar -->
-    <div class="social-sidebar">
-      <div class="social-line"></div>
-      <div class="social-icons">
-        <a href="tel:+261345238397" class="social-icon" aria-label="Téléphone">
-          <Phone class="icon" />
-          <span class="tooltip">+261 34 52 383 97</span>
-        </a>
-        <a
-          href="mailto:kelly@example.com"
-          class="social-icon"
-          aria-label="Email"
-        >
-          <Mail class="icon" />
-          <span class="tooltip">kellyalphador@gmail.com</span>
-        </a>
-        <a
-          href="https://github.com/kelly-alphador"
-          target="_blank"
-          class="social-icon"
-          aria-label="GitHub"
-        >
-          <Github class="icon" />
-          <span class="tooltip">GitHub</span>
-        </a>
-        <a
-          href="https://www.linkedin.com/in/kelly-alphador-990803362/"
-          target="_blank"
-          class="social-icon"
-          aria-label="LinkedIn"
-        >
-          <Linkedin class="icon" />
-          <span class="tooltip">LinkedIn</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Main Content Container -->
-    <div class="main-content">
-      <div id="home" class="section-container">
-        <!-- Blur Background for Home - seulement dans cette section -->
-        <div class="blur-bg-home"></div>
-        <Home />
-      </div>
-      <div id="about">
-        <About />
-      </div>
-      <div id="skills">
-        <Skills />
-      </div>
-      <div id="experience">
-        <Experience />
-      </div>
-      <div id="projects">
-        <Projects />
-      </div>
-      <div id="contact">
-        <Contact />
-      </div>
-    </div>
-
-    <!-- Back to Top Arrow -->
-    <button 
-      class="back-to-top" 
-      :class="{ 'visible': showBackToTop }"
-      @click="scrollToTop"
-      aria-label="Retour en haut"
-    >
-      <svg 
-        class="arrow-icon" 
-        width="24" 
-        height="24" 
-        viewBox="0 0 24 24" 
-        fill="none" 
-        xmlns="http://www.w3.org/2000/svg"
+      <!-- Back to Top Arrow avec animation -->
+      <button 
+        class="back-to-top" 
+        :class="{ 'visible': showBackToTop, 'animate-btt': !showBackToTop }"
+        @click="scrollToTop"
+        aria-label="Retour en haut"
+        style="animation-delay: 1.5s"
       >
-        <path 
-          d="M12 4L12 20M12 4L18 10M12 4L6 10" 
-          stroke="currentColor" 
-          stroke-width="2" 
-          stroke-linecap="round" 
-          stroke-linejoin="round"
-        />
-      </svg>
-    </button>
+        <svg 
+          class="arrow-icon" 
+          width="24" 
+          height="24" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path 
+            d="M12 4L12 20M12 4L18 10M12 4L6 10" 
+            stroke="currentColor" 
+            stroke-width="2" 
+            stroke-linecap="round" 
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
 
-    <!-- Particles Background -->
-    <div class="particles" ref="particles"></div>
+      <!-- Particles Background -->
+      <div class="particles" ref="particles"></div>
+    </template>
   </div>
 </template>
 
@@ -217,11 +206,58 @@ export default {
   },
   data() {
     return {
+      isLoading: true,
+      isFadeOut: false,
+      loadingLetters: ['A', 'K', 'A'],
+      isFalling: [false, false, false],
+      loadingProgress: 0,
       isMobileMenuOpen: false,
       activeSection: 'home',
       sections: ['home', 'about', 'skills', 'experience', 'projects', 'contact'],
       showBackToTop: false,
-      isMobileOrTablet: false
+      isMobileOrTablet: false,
+      navItems: [
+        { id: 'home', label: 'Accueil' },
+        { id: 'about', label: 'À propos' },
+        { id: 'skills', label: 'Compétences' },
+        { id: 'experience', label: 'Expériences' },
+        { id: 'projects', label: 'Projets' },
+        { id: 'contact', label: 'Contact' }
+      ],
+      socialLinks: [
+        { 
+          id: 'phone',
+          icon: 'Phone',
+          href: 'tel:+261345238397',
+          target: '_self',
+          label: 'Téléphone',
+          tooltip: '+261 34 52 383 97'
+        },
+        { 
+          id: 'email',
+          icon: 'Mail',
+          href: 'mailto:kellyalphador@gmail.com',
+          target: '_self',
+          label: 'Email',
+          tooltip: 'kellyalphador@gmail.com'
+        },
+        { 
+          id: 'github',
+          icon: 'Github',
+          href: 'https://github.com/kelly-alphador',
+          target: '_blank',
+          label: 'GitHub',
+          tooltip: 'GitHub'
+        },
+        { 
+          id: 'linkedin',
+          icon: 'Linkedin',
+          href: 'https://www.linkedin.com/in/kelly-alphador-990803362/',
+          target: '_blank',
+          label: 'LinkedIn',
+          tooltip: 'LinkedIn'
+        }
+      ]
     };
   },
   computed: {
@@ -236,6 +272,7 @@ export default {
     }
   },
   mounted() {
+    this.startLoadingAnimation();
     this.createParticles();
     this.setupScrollSpy();
     window.addEventListener('resize', this.handleResize);
@@ -251,11 +288,49 @@ export default {
     window.removeEventListener('scroll', this.handleScroll);
   },
   methods: {
+    startLoadingAnimation() {
+      // Animation séquentielle des lettres qui tombent
+      const timings = [300, 800, 1300];
+      
+      timings.forEach((delay, index) => {
+        setTimeout(() => {
+          this.isFalling[index] = true;
+          
+          if (index === 0) this.loadingProgress = 33;
+          else if (index === 1) this.loadingProgress = 66;
+          else if (index === 2) this.loadingProgress = 100;
+        }, delay);
+      });
+
+      setTimeout(() => {
+        this.isFadeOut = true;
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 800);
+      }, 2300);
+    },
+    getLetterStyle(index) {
+      const colors = [
+        '#50c878',
+        '#2e8b57',
+        '#50c878'
+      ];
+      
+      const sizes = ['8rem', '9rem', '8rem'];
+      
+      return {
+        color: colors[index],
+        fontSize: sizes[index],
+        textShadow: `0 0 40px ${colors[index]}, 0 0 80px ${colors[index]}80`
+      };
+    },
     checkDeviceType() {
       this.isMobileOrTablet = window.innerWidth <= 1024;
     },
     createParticles() {
       const particlesContainer = this.$refs.particles;
+      if (!particlesContainer) return;
+      
       const particleCount = 50;
 
       for (let i = 0; i < particleCount; i++) {
@@ -297,7 +372,6 @@ export default {
       });
     },
     updateActiveLinks() {
-      // Attendre le prochain tick pour s'assurer que le DOM est mis à jour
       this.$nextTick(() => {
         document.querySelectorAll('.nav-link').forEach(link => {
           link.classList.remove('active');
@@ -326,7 +400,6 @@ export default {
       this.updateActiveLinks();
     },
     downloadCV() {
-      // Optionnel: vous pouvez ajouter un tracking ou une confirmation ici
       console.log('Téléchargement du CV...');
       this.closeMobileMenu();
     },
@@ -347,14 +420,434 @@ export default {
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* Variables de couleurs */
 :root {
   --emerald-primary: #50c878;
   --emerald-dark: #2e8b57;
   --text-primary: #ffffff;
   --text-secondary: #e8f5e9;
-  --bg-dark: #161916;
-  --nav-bg: rgba(22, 25, 22, 0.95);
+  --bg-dark: #0a0c0a;
+  --nav-bg: rgba(10, 12, 10, 0.95);
+}
+
+/* Animations d'ouverture */
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rotateIn {
+  0% {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.5;
+    filter: blur(5px);
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes lineGrow {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  100% {
+    height: 100px;
+    opacity: 1;
+  }
+}
+
+/* Application des animations */
+.navbar.animate-in {
+  animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-item {
+  opacity: 0;
+  animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.nav-link.animate-item {
+  animation-name: fadeInScale;
+}
+
+.download-btn.animate-item {
+  animation-name: bounceIn;
+}
+
+.mobile-toggle.animate-item {
+  animation-name: rotateIn;
+}
+
+.animate-sidebar {
+  opacity: 0;
+  animation: slideLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-line {
+  opacity: 0;
+  animation: lineGrow 0.6s ease-out forwards;
+}
+
+.animate-icon {
+  opacity: 0;
+  animation: bounceIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Animations spécifiques pour chaque icône sociale */
+.social-icon.phone.animate-icon {
+  animation-name: slideLeft;
+}
+
+.social-icon.email.animate-icon {
+  animation-name: slideUp;
+}
+
+.social-icon.github.animate-icon {
+  animation-name: slideRight;
+}
+
+.social-icon.linkedin.animate-icon {
+  animation-name: fadeInScale;
+}
+
+.animate-content {
+  opacity: 0;
+  animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-blur {
+  opacity: 0;
+  animation: glowPulse 1.5s ease-out forwards;
+}
+
+.animate-btt {
+  opacity: 0;
+  animation: bounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Loading Screen */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--bg-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+
+.loading-screen.fade-out {
+  opacity: 0;
+  transform: scale(1.1);
+  pointer-events: none;
+}
+
+.splash-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.gradient-sphere {
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 80%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(80, 200, 120, 0.3) 0%,
+    rgba(46, 139, 87, 0.2) 30%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  animation: rotateSphere 20s linear infinite;
+}
+
+.gradient-sphere-2 {
+  position: absolute;
+  bottom: -50%;
+  right: -20%;
+  width: 80%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(80, 200, 120, 0.25) 0%,
+    rgba(20, 160, 133, 0.15) 40%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  animation: rotateSphere2 25s linear infinite;
+}
+
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 30% 50%,
+    rgba(80, 200, 120, 0.1) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+@keyframes rotateSphere {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes rotateSphere2 {
+  0% {
+    transform: rotate(0deg) scale(1.2);
+  }
+  50% {
+    transform: rotate(-180deg) scale(1);
+  }
+  100% {
+    transform: rotate(-360deg) scale(1.2);
+  }
+}
+
+.letters-container {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+  perspective: 1000px;
+  z-index: 10;
+  position: relative;
+}
+
+.loading-letter {
+  font-family: "Jost", sans-serif;
+  font-weight: 800;
+  opacity: 0;
+  transform: translateY(-100vh) rotateX(-90deg) scale(0.5);
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  filter: drop-shadow(0 0 30px currentColor);
+}
+
+.loading-letter.falling {
+  opacity: 1;
+  transform: translateY(0) rotateX(0) scale(1);
+}
+
+@keyframes fallLetter {
+  0% {
+    opacity: 0;
+    transform: translateY(-100vh) rotateX(-90deg) scale(0.5);
+  }
+  40% {
+    opacity: 0.8;
+    transform: translateY(30px) rotateX(15deg) scale(1.1);
+  }
+  60% {
+    transform: translateY(-15px) rotateX(-5deg) scale(1);
+  }
+  80% {
+    transform: translateY(5px) rotateX(2deg) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0) scale(1);
+  }
+}
+
+.loading-letter.falling {
+  animation: fallLetter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.loading-progress-container {
+  width: 300px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 0 20px rgba(80, 200, 120, 0.3);
+}
+
+.loading-progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--emerald-primary), var(--emerald-dark));
+  border-radius: 3px;
+  transition: width 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: progressGlow 1.5s linear infinite;
+}
+
+@keyframes progressGlow {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.loading-text {
+  margin-top: 30px;
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  letter-spacing: 2px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+  z-index: 10;
+  position: relative;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.loading-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-15px) scale(1.05);
+  }
+}
+
+.loading-letter.falling.letter-0 {
+  animation: fallLetter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             bounce 2s ease-in-out 0.8s infinite;
+}
+
+.loading-letter.falling.letter-1 {
+  animation: fallLetter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             bounce 2s ease-in-out 0.9s infinite;
+}
+
+.loading-letter.falling.letter-2 {
+  animation: fallLetter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             bounce 2s ease-in-out 1s infinite;
 }
 
 /* Global Styles */
@@ -382,10 +875,9 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  padding-top: 80px; /* Pour éviter que le contenu soit caché sous la navbar */
+  padding-top: 80px;
 }
 
-/* App Container */
 #app {
   position: relative;
   width: 100%;
@@ -404,6 +896,7 @@ body {
   border-bottom: 1px solid rgba(80, 200, 120, 0.1);
   z-index: 1000;
   padding: 0 20px;
+  opacity: 0;
 }
 
 .nav-container {
@@ -416,7 +909,6 @@ body {
   position: relative;
 }
 
-/* Logo */
 .logo {
   display: flex;
   align-items: center;
@@ -438,7 +930,6 @@ body {
   transform: scale(1.05);
 }
 
-/* Navigation Links */
 .nav-links {
   display: flex;
   gap: 40px;
@@ -476,7 +967,6 @@ body {
   width: 100%;
 }
 
-/* Active Link - LIGNE VERTE */
 .nav-link.active {
   color: var(--emerald-primary);
 }
@@ -485,7 +975,6 @@ body {
   width: 100%;
 }
 
-/* Conteneur pour les boutons de droite */
 .nav-right {
   display: flex;
   align-items: center;
@@ -494,7 +983,7 @@ body {
   justify-content: flex-end;
 }
 
-/* Download CV Button */
+/* Download CV Button - Style amélioré */
 .download-btn {
   padding: 12px 28px;
   background: linear-gradient(135deg, #33c965, var(--emerald-dark));
@@ -510,16 +999,34 @@ body {
   align-items: center;
   justify-content: center;
   white-space: nowrap;
-  min-width: 160px;
+  min-width: 180px;
+  gap: 10px;
+  box-shadow: 0 4px 15px rgba(80, 200, 120, 0.2);
 }
 
 .download-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(80, 200, 120, 0.3);
+  box-shadow: 0 10px 25px rgba(80, 200, 120, 0.4);
   background: linear-gradient(135deg, #2eb85c, #267d46);
 }
 
-/* Version icône seulement */
+.download-btn:active {
+  transform: translateY(0);
+}
+
+.download-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-icon {
+  width: 20px;
+  height: 20px;
+  stroke: var(--bg-dark);
+}
+
+/* Version icône seulement pour mobile/tablette */
 .download-btn.icon-only {
   padding: 10px;
   min-width: auto;
@@ -533,10 +1040,6 @@ body {
   width: 24px;
   height: 24px;
   stroke: var(--bg-dark);
-}
-
-.download-text {
-  display: inline-block;
 }
 
 /* Mobile Toggle */
@@ -579,7 +1082,6 @@ body {
   transform: rotate(-45deg) translate(7px, -6px);
 }
 
-/* Active Indicator for Mobile */
 .active-indicator {
   position: absolute;
   bottom: 0;
@@ -655,7 +1157,6 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Tooltip */
 .tooltip {
   position: absolute;
   left: 60px;
@@ -694,7 +1195,6 @@ body {
   left: 65px;
 }
 
-/* Main Content */
 .main-content {
   padding-top: 0;
   min-height: 100vh;
@@ -705,19 +1205,16 @@ body {
   z-index: 2;
 }
 
-/* Container pour chaque section avec position relative */
 .section-container {
   position: relative;
   width: 100%;
 }
 
-/* S'assurer que les composants prennent toute la largeur */
 .main-content > div {
   width: 100%;
   flex-shrink: 0;
 }
 
-/* Correction pour centrer le contenu Home */
 #home {
   display: flex;
   align-items: center;
@@ -725,7 +1222,6 @@ body {
   min-height: 100vh;
 }
 
-/* Particles Background */
 .particles {
   position: fixed;
   top: 0;
@@ -736,7 +1232,6 @@ body {
   z-index: 1;
 }
 
-/* Blur Background for Home Section */
 .blur-bg-home {
   position: absolute;
   top: 10%;
@@ -757,7 +1252,6 @@ body {
   opacity: 0.6;
 }
 
-/* Animation subtile de flottement */
 @keyframes float {
   0%,
   100% {
@@ -835,7 +1329,6 @@ body {
   animation: arrowFloatFast 1s ease-in-out infinite;
 }
 
-/* Animation de flottement continue pour la flèche */
 @keyframes continuousBounce {
   0%, 100% {
     transform: translateY(0);
@@ -854,7 +1347,6 @@ body {
   }
 }
 
-/* Animation de la flèche qui bouge */
 @keyframes arrowFloat {
   0%, 100% {
     transform: translateY(0);
@@ -885,7 +1377,7 @@ body {
   }
 }
 
-/* Responsive Design pour tablette (1024px) et mobile */
+/* Responsive Design */
 @media (max-width: 1200px) {
   .social-sidebar {
     left: 20px;
@@ -897,13 +1389,12 @@ body {
   
   .download-btn:not(.icon-only) {
     padding: 10px 20px;
-    min-width: 140px;
+    min-width: 160px;
     font-size: 0.95rem;
   }
 }
 
 @media (max-width: 1024px) {
-  /* Pour tablette */
   body {
     padding-top: 75px;
   }
@@ -950,28 +1441,26 @@ body {
     display: none;
   }
   
-  /* Active state pour mobile/tablette */
   .nav-link.active {
     background: rgba(80, 200, 120, 0.1);
   }
   
   .mobile-toggle {
     display: block;
-    order: 3; /* Met le hamburger tout à droite */
+    order: 3;
   }
   
   .active-indicator {
     display: block;
   }
   
-  /* Le bouton télécharger devient une icône */
   .download-btn {
     min-width: auto;
     width: 50px;
     height: 50px;
     padding: 10px;
     border-radius: 50%;
-    order: 2; /* Met l'icône télécharger avant le hamburger */
+    order: 2;
   }
   
   .download-text {
@@ -1010,29 +1499,13 @@ body {
     height: 350px;
     filter: blur(45px);
   }
-}
 
-@media (max-width: 968px) {
-  .social-sidebar {
-    left: 15px;
+  .loading-letter {
+    font-size: 6rem !important;
   }
-
-  .social-icon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .social-icon .icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .blur-bg-home {
-    top: 15%;
-    left: 5%;
-    width: 300px;
-    height: 300px;
-    filter: blur(40px);
+  
+  .loading-progress-container {
+    width: 250px;
   }
 }
 
@@ -1062,42 +1535,7 @@ body {
   }
 
   .nav-links {
-    position: fixed;
     top: 70px;
-    left: 0;
-    width: 100%;
-    background: var(--nav-bg);
-    backdrop-filter: blur(10px);
-    flex-direction: column;
-    gap: 0;
-    padding: 20px 0;
-    transform: translateY(-100%);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(80, 200, 120, 0.1);
-  }
-
-  .nav-links.mobile-open {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .nav-link {
-    width: 100%;
-    text-align: center;
-    padding: 15px 20px;
-    font-size: 1.2rem;
-  }
-
-  .nav-link::after {
-    display: none;
-  }
-
-  /* Active state pour mobile */
-  .nav-link.active {
-    background: rgba(80, 200, 120, 0.1);
   }
 
   .social-sidebar {
@@ -1138,6 +1576,22 @@ body {
     50% {
       transform: translateY(-6px);
     }
+  }
+
+  .loading-letter {
+    font-size: 5rem !important;
+  }
+  
+  .letters-container {
+    gap: 15px;
+  }
+  
+  .loading-progress-container {
+    width: 200px;
+  }
+  
+  .loading-text {
+    font-size: 1rem;
   }
 }
 
@@ -1187,6 +1641,18 @@ body {
     right: 15px;
     width: 40px;
     height: 40px;
+  }
+
+  .loading-letter {
+    font-size: 3.5rem !important;
+  }
+  
+  .letters-container {
+    gap: 10px;
+  }
+  
+  .loading-progress-container {
+    width: 180px;
   }
 }
 </style>
