@@ -128,8 +128,6 @@
       <!-- Main Content Container avec animations -->
       <div class="main-content animate-content" style="animation-delay: 1.2s">
         <div id="home" class="section-container">
-          <!-- Blur Background for Home - seulement dans cette section -->
-          <div class="blur-bg-home animate-blur"></div>
           <Home />
         </div>
         <div id="about">
@@ -143,6 +141,9 @@
         </div>
         <div id="projects">
           <Projects />
+        </div>
+        <div id="certificates">
+          <Certificates />
         </div>
         <div id="contact">
           <Contact />
@@ -177,6 +178,15 @@
 
       <!-- Particles Background -->
       <div class="particles" ref="particles"></div>
+
+      <!-- Background Lighting (halos verts) -->
+      <div class="bg-lighting">
+        <div class="bg-glow bg-glow-top"></div>
+        <div class="bg-glow bg-glow-bottom"></div>
+      </div>
+
+      <!-- Scanline Overlay -->
+      <div class="scanline-overlay"></div>
     </template>
   </div>
 </template>
@@ -188,6 +198,7 @@ import Experience from "./components/Experience.vue";
 import Projects from "./components/Projects.vue";
 import Contact from "./components/Contact.vue";
 import About from "./components/About.vue";
+import Certificates from "./components/Certificates.vue";
 import { Phone, Mail, Github, Linkedin } from "lucide-vue-next";
 
 export default {
@@ -198,6 +209,7 @@ export default {
     About,
     Experience,
     Projects,
+    Certificates,
     Contact,
     Phone,
     Mail,
@@ -213,7 +225,7 @@ export default {
       loadingProgress: 0,
       isMobileMenuOpen: false,
       activeSection: 'home',
-      sections: ['home', 'about', 'skills', 'experience', 'projects', 'contact'],
+      sections: ['home', 'about', 'skills', 'experience', 'projects', 'contact', 'certificates'],
       showBackToTop: false,
       isMobileOrTablet: false,
       navItems: [
@@ -222,7 +234,9 @@ export default {
         { id: 'skills', label: 'Compétences' },
         { id: 'experience', label: 'Expériences' },
         { id: 'projects', label: 'Projets' },
-        { id: 'contact', label: 'Contact' }
+         { id: 'certificates', label: 'Certificats' },
+        { id: 'contact', label: 'Contact' },
+       
       ],
       socialLinks: [
         { 
@@ -425,7 +439,8 @@ export default {
   --emerald-dark: #2e8b57;
   --text-primary: #ffffff;
   --text-secondary: #e8f5e9;
-  --bg-dark: #0a0c0a;
+  --bg-dark: #101415;
+  --neon-glow: #54e98a;
   --nav-bg: rgba(10, 12, 10, 0.95);
 }
 
@@ -513,24 +528,6 @@ export default {
   }
 }
 
-@keyframes glowPulse {
-  0% {
-    opacity: 0;
-    filter: blur(10px);
-    transform: scale(0.9);
-  }
-  50% {
-    opacity: 0.5;
-    filter: blur(5px);
-    transform: scale(1.1);
-  }
-  100% {
-    opacity: 1;
-    filter: blur(0);
-    transform: scale(1);
-  }
-}
-
 @keyframes lineGrow {
   0% {
     height: 0;
@@ -599,11 +596,6 @@ export default {
 .animate-content {
   opacity: 0;
   animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-.animate-blur {
-  opacity: 0;
-  animation: glowPulse 1.5s ease-out forwards;
 }
 
 .animate-btt {
@@ -891,8 +883,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background: var(--nav-bg);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(100px);
   border-bottom: 1px solid rgba(80, 200, 120, 0.1);
   z-index: 1000;
   padding: 0 20px;
@@ -1232,39 +1223,6 @@ body {
   z-index: 1;
 }
 
-.blur-bg-home {
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(
-    circle,
-    rgba(80, 200, 120, 0.3) 0%,
-    rgba(20, 160, 133, 0.2) 30%,
-    rgba(80, 200, 120, 0.08) 60%,
-    rgba(80, 200, 120, 0) 85%
-  );
-  filter: blur(50px);
-  pointer-events: none;
-  z-index: 0;
-  animation: float 15s ease-in-out infinite;
-  opacity: 0.6;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(-15px, 10px) scale(1.02);
-  }
-  66% {
-    transform: translate(10px, -5px) scale(0.98);
-  }
-}
-
 .particle {
   position: absolute;
   width: 2px;
@@ -1282,6 +1240,48 @@ body {
   50% {
     opacity: 1;
   }
+}
+
+/* Background Lighting (halos verts, façon DEV_ARCHITECT) */
+.bg-lighting {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-glow {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background: rgba(84, 233, 138, 0.05);
+  filter: blur(120px);
+  border-radius: 50%;
+}
+
+.bg-glow-top {
+  top: -10%;
+  left: -10%;
+}
+
+.bg-glow-bottom {
+  bottom: -10%;
+  right: -10%;
+}
+
+/* Scanline Overlay */
+.scanline-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(84, 233, 138, 0.03) 50%
+  );
+  background-size: 100% 4px;
 }
 
 /* Back to Top Arrow */
@@ -1493,12 +1493,6 @@ body {
     font-size: 0.85rem;
     padding: 6px 10px;
   }
-  
-  .blur-bg-home {
-    width: 350px;
-    height: 350px;
-    filter: blur(45px);
-  }
 
   .loading-letter {
     font-size: 6rem !important;
@@ -1544,15 +1538,6 @@ body {
 
   .active-indicator {
     display: block;
-  }
-
-  .blur-bg-home {
-    top: 20%;
-    left: 5%;
-    width: 250px;
-    height: 250px;
-    filter: blur(30px);
-    opacity: 0.5;
   }
 
   .particle {
@@ -1625,15 +1610,6 @@ body {
   .download-icon {
     width: 20px;
     height: 20px;
-  }
-
-  .blur-bg-home {
-    top: 25%;
-    left: 5%;
-    width: 200px;
-    height: 200px;
-    filter: blur(25px);
-    opacity: 0.4;
   }
 
   .back-to-top {

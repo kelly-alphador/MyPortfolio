@@ -7,7 +7,78 @@
       
       <div class="experience-grid">
 
-        <!-- Spray Info Experience (MOST RECENT) -->
+        <!-- Smart Systems Experience (MOST RECENT) -->
+        <div class="experience-card">
+          <div class="experience-header">
+            <div class="company-info">
+              <h3 class="company-name">SMART SYSTEMS</h3>
+              <span class="experience-duration">Avril 2026 - Juin 2026</span>
+            </div>
+            <h4 class="job-title">Développeur Full-Stack .NET / Angular (Stagiaire)</h4>
+          </div>
+          
+          <div class="experience-content">
+            <h5 class="project-title">Application POS – Caisse (Tunis, Tunisie)</h5>
+            <p class="project-description">
+              Développement d'une application de point de vente (POS) permettant aux caissiers 
+              de gérer l'ouverture et la fermeture de caisse, la création de commandes, 
+              la sélection des produits par catégorie ou par code-barres, le choix du client 
+              et de la table, l'aperçu du ticket avant confirmation, ainsi que le calcul automatique 
+              de la TVA. L'application gère également la reprise des commandes non confirmées 
+              en cas de coupure d'électricité.
+            </p>
+            
+            <div class="tech-stack">
+              <span class="tech-tag">ASP.NET Core 8</span>
+              <span class="tech-tag">Web API</span>
+              <span class="tech-tag">Angular</span>
+              <span class="tech-tag">PrimeNG</span>
+              <span class="tech-tag">JWT</span>
+              <span class="tech-tag">DDD</span>
+              <span class="tech-tag">CQRS</span>
+              <span class="tech-tag">SQL Server</span>
+              <span class="tech-tag">IIS</span>
+              <span class="tech-tag">Git</span>
+            </div>
+            
+            <ul class="achievements">
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>Gestion de l'ouverture et de la fermeture de caisse par le caissier</span>
+              </li>
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>Ajout de produits au panier par catégorie ou par scan de code-barres</span>
+              </li>
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>Sélection du client et de la table avant confirmation de la commande</span>
+              </li>
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>Aperçu du ticket et calcul automatique de la TVA</span>
+              </li>
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>Reprise des commandes non confirmées en cas de coupure d'électricité</span>
+              </li>
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>Authentification sécurisée via JWT et configuration CORS</span>
+              </li>
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>Architecture DDD / CQRS avec tests unitaires</span>
+              </li>
+              <li class="achievement-item">
+                <div class="achievement-dot"></div>
+                <span>Déploiement de l'application sur IIS</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Spray Info Experience -->
         <div class="experience-card">
           <div class="experience-header">
             <div class="company-info">
@@ -332,6 +403,10 @@ export default {
 
 .experience-card:nth-child(2).animated {
     animation: fadeInUp 0.6s ease 0.3s forwards;
+}
+
+.experience-card:nth-child(3).animated {
+    animation: fadeInUp 0.6s ease 0.5s forwards;
 }
 
 @keyframes fadeInUp {

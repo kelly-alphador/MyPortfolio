@@ -61,6 +61,7 @@ const technologies = [
   { name: '.NET', icon: 'dotnet.svg' },
   { name: 'Vue.js', icon: 'vue.svg' },
   { name: 'MySQL', icon: 'mysql.svg' },
+    { name: 'Angular', icon: 'angular.svg' },
   { name: 'Docker', icon: 'docker.svg' },
   { name: 'Git', icon: 'git.svg' },
   { name: 'Bootstrap', icon: 'bootstrap.svg' },
