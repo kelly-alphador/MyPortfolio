@@ -112,7 +112,7 @@ import chronoDevImg from '@/assets/images/image_app/chronodev.png'
 import portfolioImg from '@/assets/images/image_app/portfolio.png'
 import dantzigImg from '@/assets/images/image_app/DANDZIG.png'
 import taskManagerImg from '@/assets/images/image_app/Gestion_tacche.png'
-
+import caisseImg from '@/assets/images/image_app/caisse.png'
 export default {
   name: "Projects",
   data() {
@@ -188,7 +188,18 @@ Cette solution aide les étudiants à mieux comprendre le fonctionnement de l'al
           githubLink: "#",
           technologies: ["C#", "Windows Forms", ".NET"],
           isExpanded: false
-        }
+        },
+        {
+          title: "POS Caisse",
+          category: "Application Web",
+          description: "Application de point de vente (POS) développée pour un client en Tunisie. Elle permet la gestion des ventes, des produits, du stock et des clients, le scan de codes-barres, le calcul automatique de la TVA selon les règles métier ainsi que l'impression des tickets de caisse.",
+          image: caisseImg,
+          imageAlt: "Capture d'écran POS Caisse",
+          demoLink: "#",
+          githubLink: "#",
+          technologies: ["ASP.NET Core", "Angular", "SQL Server", "PrimeNG"],
+          isExpanded: false
+        },
       ]
     };
   },
