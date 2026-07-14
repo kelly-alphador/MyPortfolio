@@ -3,18 +3,18 @@
     <div class="about-container">
       <h2 class="about-title">a propos</h2>
       <p class="about-intro">
-       Passionné par le développement et l’innovation, je transforme des problématiques réelles en solutions digitales performantes, avec une approche centrée sur l’utilisateur, l’efficacité et la qualité.
+          Passionné par le développement logiciel et l'innovation, je transforme des problématiques réelles en solutions digitales performantes, avec une approche centrée sur l'utilisateur, l'efficacité et la qualité.
       </p>
 
       <div class="about-description">
         <p>
-            Développeur Full-Stack .NET, Vue.js & Angular et actuellement étudiant en Master à l’École Nationale d’Informatique (ENI), j’accompagne les entreprises et les porteurs de projets dans la résolution de leurs défis numériques. J’analyse les besoins, identifie les points de blocage et conçois des applications web et desktop qui optimisent les processus, réduisent les pertes de temps et améliorent la gestion des activités.
+            Actuellement étudiant en Master 2 à l'École Nationale d'Informatique (ENI), je développe des applications web en utilisant différentes technologies, notamment PHP (Symfony),Node.js, ASP.NET, Vue.js et Angular. J'accompagne les entreprises et les porteurs de projets dans la conception de solutions permettant d'optimiser les processus métier et d'améliorer la gestion de leurs activités.
         </p>
         <p>
-          Mon expertise couvre la conception d’architectures robustes avec ASP.NET Core Web API et MVC, en appliquant des principes tels que le DDD et le CQRS, ainsi que la sécurisation des applications via JWT. Je développe également des applications Windows via WPF et Windows Forms. Côté front-end, j’utilise Vue.js et Angular (avec PrimeNG) pour créer des interfaces modernes, intuitives et centrées sur l’expérience utilisateur.
+          J'accorde une importance particulière à la conception d'applications robustes, à l'utilisation d'API REST, à la modélisation des bases de données et à l'application des bonnes pratiques de développement telles que la Clean Architecture, le DDD et les tests. J'apprécie également travailler avec Git, Docker et les outils modernes qui facilitent la qualité et la collaboration.
         </p>
         <p>
-          Mon objectif n’est pas seulement de développer des applications, mais de proposer des solutions concrètes qui apportent un réel impact aux utilisateurs et aux organisations.
+          Curieux, rigoureux et doté d'une forte capacité d'apprentissage, je m'adapte rapidement aux nouvelles technologies. Mon objectif est de concevoir des solutions fiables, maintenables et utiles, qui apportent une réelle valeur aux utilisateurs et aux organisations.
         </p>
       </div>
     </div>

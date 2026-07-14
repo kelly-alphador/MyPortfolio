@@ -86,12 +86,13 @@ export default {
       setTimeout(() => {
         this.typed = new Typed(this.$refs.typedElement, {
           strings: [
-            "Full-Stack Developer",
-            ".NET / Angular.js",
-            "Full-Stack Developer",
-            ".NET / Vue.js",
-            "Full-Stack Developer",
-            ".NET / Angular.js",
+            "Développeur Logiciel",
+            "Développeur Logiciel",
+            "Développeur Logiciel",
+            "Développeur Logiciel",
+            "Développeur Logiciel",
+            "Développeur Logiciel",
+            "Développeur Logiciel",
           ],
           typeSpeed: 60,
           backSpeed: 30,
